@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Movie_app_compose"
+include ':app'
+include ':auth:data'
+include ':auth:presentation'
+include ':auth:domain'
+include ':movies:data'
+include ':movies:presentation'
+include ':movies:domin'
+include ':core'
