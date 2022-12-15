@@ -1,7 +1,6 @@
 apply {
-    from("$rootDir/base.gradle")
+    from("$rootDir/baseCompose.gradle")
 }
 
 dependencies {
-
 }
