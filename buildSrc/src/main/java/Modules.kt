@@ -1,13 +1,14 @@
 object Modules {
     const val app = ":app"
-
     const val core = ":core"
-    const val coreUi = ":core-ui"
+    const val auth_data = ":auth:data"
+    const val auth_domain = ":auth:domain"
+    const val auth_presentation = ":auth:presentation"
+    const val movies_data = ":auth:data"
+    const val movies_domain = ":auth:domain"
+    const val movies_presentation = ":movies:presentation"
 
-    const val onboardingDomain = ":onboarding:onboarding_domain"
-    const val onboardingPresentation = ":onboarding:onboarding_presentation"
 
-    const val trackerData = ":tracker:tracker_data"
-    const val trackerDomain = ":tracker:tracker_domain"
+
     const val trackerPresentation = ":tracker:tracker_presentation"
 }

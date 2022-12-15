@@ -6,6 +6,8 @@ object Coroutines {
 
     const val coroutineAndroid="org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
 
+    const val coroutineFirebase="org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
+
     const val coroutinViewModelLifeCycle="androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     const val coroutineLifecycle="androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 }
