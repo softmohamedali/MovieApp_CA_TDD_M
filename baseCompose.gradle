@@ -2,10 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
-
+apply plugin: 'dagger.hilt.android.plugin'
 android {
     compileSdk ProjectConfig.compileSdk
-    namespace =ProjectConfig.appId
     defaultConfig {
         minSdk ProjectConfig.minSdk
         targetSdk ProjectConfig.targetSdk
@@ -17,6 +16,10 @@ android {
     }
     buildFeatures {
         compose true
+    }
+    hilt{
+        enableAggregatingTask=true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion Compose.composeCompilerVersion
@@ -36,6 +39,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -49,8 +53,9 @@ dependencies {
     implementation Compose.viewModelCompose
     implementation Compose.activityCompose
 
-    kapt DaggerHilt.hiltCompiler
     implementation DaggerHilt.hiltAndroid
+    kapt DaggerHilt.hiltCompiler
+    kapt DaggerHilt.hitlKapt
 
     testImplementation Testing.junit4
     testImplementation Testing.junitAndroidExt

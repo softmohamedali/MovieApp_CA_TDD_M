@@ -14,10 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Movie_app_compose"
 include ':app'
-include ':auth:data'
-include ':auth:presentation'
-include ':auth:domain'
-include ':movies:data'
-include ':movies:presentation'
-include ':movies:domin'
+include ':auth:auth_data'
+include ':auth:auth_presentation'
+include ':auth:auth_domain'
+include ':movies:movie_data'
+include ':movies:movie_presentation'
+include ':movies:movie_domin'
 include ':core'

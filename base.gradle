@@ -2,10 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
-
+apply plugin: 'dagger.hilt.android.plugin'
 android {
     compileSdk ProjectConfig.compileSdk
-    namespace =ProjectConfig.appId
+
     defaultConfig {
         minSdk ProjectConfig.minSdk
         targetSdk ProjectConfig.targetSdk
@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    hilt{
+        enableAggregatingTask=true
+
+    }
     compileOptions {
         coreLibraryDesugaringEnabled true
 
@@ -33,8 +37,16 @@ android {
 }
 
 dependencies {
-    kapt DaggerHilt.hiltCompiler
+
+
+
     implementation DaggerHilt.hiltAndroid
+    kapt DaggerHilt.hiltCompiler
+    kapt DaggerHilt.hitlKapt
+
+
+
+
 
     testImplementation Testing.junit4
     testImplementation Testing.junitAndroidExt

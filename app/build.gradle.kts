@@ -1,14 +1,13 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id ("com.google.gms.google-services")
 }
 
 android {
     compileSdk = ProjectConfig.compileSdk
-    namespace =ProjectConfig.appId
     defaultConfig {
         applicationId = ProjectConfig.appId
         minSdk = ProjectConfig.minSdk
@@ -20,6 +19,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+    }
+    defaultConfig {
+        multiDexEnabled =true
     }
 
     buildTypes {
@@ -39,6 +41,10 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
+    }
+    hilt{
+        enableAggregatingTask=true
+
     }
     packagingOptions {
         exclude("META-INF/AL2.0")
@@ -61,14 +67,13 @@ dependencies {
 
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
+    kapt(DaggerHilt.hitlKapt)
+    implementation("javax.inject:javax.inject:1")
+
 
     implementation(project(Modules.core))
-//    implementation(project(Modules.coreUi))
-//    implementation(project(Modules.onboardingPresentation))
-//    implementation(project(Modules.onboardingDomain))
-//    implementation(project(Modules.trackerPresentation))
-//    implementation(project(Modules.trackerDomain))
-//    implementation(project(Modules.trackerData))
+    implementation(project(Modules.auth_presentation))
+    implementation(project(Modules.movies_presentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
