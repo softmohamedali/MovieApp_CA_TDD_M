@@ -56,7 +56,7 @@ dependencies {
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
     kapt DaggerHilt.hitlKapt
-
+    implementation("javax.inject:javax.inject:1")
     testImplementation Testing.junit4
     testImplementation Testing.junitAndroidExt
     testImplementation Testing.truth

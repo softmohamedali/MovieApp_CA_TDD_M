@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class AuthRepoImpl(
+class AuthRepoImpl @Inject constructor(
     private val firebaseSource: FirebaseSource
 ) :AuthRepo{
 
