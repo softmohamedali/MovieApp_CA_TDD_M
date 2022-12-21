@@ -67,12 +67,12 @@ dependencies {
 
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
-    kapt(DaggerHilt.hitlKapt)
-    implementation("javax.inject:javax.inject:1")
 
 
     implementation(project(Modules.core))
     implementation(project(Modules.auth_presentation))
+    implementation(project(Modules.auth_domain))
+    implementation(project(Modules.auth_data))
     implementation(project(Modules.movies_presentation))
 
     implementation(AndroidX.coreKtx)

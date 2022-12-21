@@ -12,7 +12,6 @@ dependencies {
     "implementation"(project(Modules.core))
     "implementation"(project(Modules.auth_domain))
     "implementation"(Coroutines.coroutines)
-    "implementation"("javax.inject:javax.inject:1")
 
 }
 
