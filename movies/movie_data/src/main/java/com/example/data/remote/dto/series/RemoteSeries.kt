@@ -13,7 +13,7 @@ data class RemoteSeries(
     @SerializedName("first_air_date")
     val firstAirDate: Any,
     @SerializedName("genres")
-    val genres: List<GenreSeries>,
+    val genres: List<RemoteGenreSeries>,
     @SerializedName("homepage")
     val homepage: String,
     @SerializedName("id")

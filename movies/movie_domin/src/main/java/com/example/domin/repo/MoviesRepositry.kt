@@ -1,34 +1,35 @@
 package com.example.domin.repo
 
 import com.example.core.domain.models.ResultState
+import com.example.domin.models.*
 
 interface MoviesRepositry {
 
-    suspend fun getPopulateMovie(query:HashMap<String,String>): ResultState<MovieResults>
+    suspend fun getPopulateMovie(query:HashMap<String,String>): ResultState<List<MovieItem>>
 
-    suspend fun getPopulateSeries(query:HashMap<String,String>):ResultState<SeriesResult>
+    suspend fun getPopulateSeries(query:HashMap<String,String>):ResultState<List<SeriesItem>>
 
-    suspend fun getPopulatePeople(query:HashMap<String,String>):ResultState<PeopleResult>
+    suspend fun getPopulateActor(query:HashMap<String,String>):ResultState<List<ActorItem>>
 
     suspend fun getMovie(
         id:Int,
         query:HashMap<String,String>
     ):ResultState<Movie>
 
-    suspend fun getTv(
+    suspend fun getSeries(
         id:Int,
         query:HashMap<String,String>
-    ):ResultState<Tv>
+    ):ResultState<Series>
 
-    suspend fun getPeople(
+    suspend fun getActor(
         id:Int,
         query:HashMap<String,String>
     ):ResultState<Actor>
 
-    suspend fun getVedio(
+    suspend fun getVideo(
         id:Int,
         query:HashMap<String,String>
-    ):ResultState<Vedio>
+    ):ResultState<Video>
 
-    suspend fun getSearchMovie(query:HashMap<String,String>):ResultState<MovieResults>
+    suspend fun getSearchMovie(query:HashMap<String,String>):ResultState<List<MovieItem>>
 }

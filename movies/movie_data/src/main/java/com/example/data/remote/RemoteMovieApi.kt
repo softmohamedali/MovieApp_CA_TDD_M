@@ -6,7 +6,7 @@ import com.example.data.remote.dto.movie.MovieResult
 import com.example.data.remote.dto.movie.RemoteMovie
 import com.example.data.remote.dto.series.RemoteSeries
 import com.example.data.remote.dto.series.SeriesResult
-import com.example.data.remote.dto.vedio.VedioResult
+import com.example.data.remote.dto.vedio.VideoResult
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -44,7 +44,7 @@ interface RemoteMovieApi {
     suspend fun getVedio(
         @Path("idm") id:Int,
         @QueryMap query:HashMap<String,String>
-    ):Response<VedioResult>
+    ):Response<VideoResult>
 
     @GET("search/movie")
     suspend fun getSearchMovie(@QueryMap query:HashMap<String,String>):Response<MovieResult>

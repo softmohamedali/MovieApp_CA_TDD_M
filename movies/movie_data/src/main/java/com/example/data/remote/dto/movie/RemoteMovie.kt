@@ -11,7 +11,7 @@ data class RemoteMovie(
     @SerializedName("budget")
     val budget: Int,
     @SerializedName("genres")
-    val genreMovies: List<GenreMovie>,
+    val remoteGenreMovies: List<RemoteGenreMovie>,
     @SerializedName("homepage")
     val homepage: String,
     @SerializedName("id")
