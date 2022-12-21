@@ -39,7 +39,6 @@ fun LoginView(
     onPasswordChange:(String)-> Unit,
     onLoginClick:()->Unit,
     onRegisterClick:()->Unit,
-    onSuccess:()->Unit
 ) {
     val stateScrollable= rememberScrollState()
     val scaffoldState = rememberScaffoldState()
@@ -48,6 +47,15 @@ fun LoginView(
         if (isError!=null){
             scope.launch {
                 scaffoldState.snackbarHostState.showSnackbar("Error:$isError","OK")
+            }
+        }
+    }
+    LaunchedEffect(key1 = isSuccess){
+        if (isSuccess){
+            scope.launch {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = "successfully Login"
+                )
             }
         }
     }
@@ -120,9 +128,6 @@ fun LoginView(
                         )
                     }
 
-                }
-                if (isSuccess){
-                    onSuccess()
                 }
                 if (isLoading){
                     LoadingLayer()

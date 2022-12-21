@@ -8,12 +8,15 @@ import kotlinx.coroutines.flow.flow
 class LoginUseCase(
     private val authRepo: AuthRepo
 ) {
-    suspend operator fun invoke(email:String,pass:String):Flow<ResultState<String>> =flow{
-        emit(ResultState.IsLoading)
-        val result=authRepo.logIn(
+    suspend operator fun invoke(email:String,pass:String,result:(ResultState<String>)->Unit){
+        result(ResultState.IsLoading)
+        authRepo.logIn(
             email = email,
-            password = pass
+            password = pass,
+            result = {
+                result(it)
+            }
         )
-        emit(result)
+
     }
 }

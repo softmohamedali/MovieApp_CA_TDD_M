@@ -59,8 +59,8 @@ class LoginViewModel @Inject constructor(
     }
 
     private suspend fun login() = withContext(Dispatchers.IO) {
-        loginUseCase(state.email, state.password).collect { result ->
-            when (result) {
+        loginUseCase(state.email, state.password, result = {
+            when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(
                         success = true,
@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
                     state = state.copy(
                         success = false,
                         loading = false,
-                        error = result.message
+                        error = it.message
                     )
                 }
                 is ResultState.IsLoading -> {
@@ -83,7 +83,7 @@ class LoginViewModel @Inject constructor(
                     )
                 }
             }
-        }
+        })
     }
 
     private fun cleanState() {

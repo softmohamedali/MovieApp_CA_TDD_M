@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.DateTimeFormated
 import com.example.core.domain.utils.ValidateState
+import com.example.core.domain.utils.log
 import com.example.domain.usecases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +25,7 @@ class RegisterViewModel @Inject constructor(
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val validateConfirmPasswordUseCase: ValidateConfirmPasswordUseCase,
     private val validateAccepteTermsUseCase: ValidateAccepteTermsUseCase
-) : ViewModel(){
+) : ViewModel() {
 
     private var _isRegister = MutableStateFlow<ResultState<String>>(ResultState.Init)
     val isRegister: StateFlow<ResultState<String>> = _isRegister
@@ -45,7 +46,7 @@ class RegisterViewModel @Inject constructor(
             is RegisterEvent.AcceptTermsChanged -> {
                 state = state.copy(termsChecked = event.accepted)
             }
-            is RegisterEvent.NameChanged ->{
+            is RegisterEvent.NameChanged -> {
                 state = state.copy(name = event.name)
             }
             is RegisterEvent.RegisterSubmit -> {
@@ -56,6 +57,7 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun registerSubmit() {
+        log("registerSubmit Register viewmodel ")
         viewModelScope.launch {
             val validateEmailResult = validateEmailUseCase(state.email)
             val validatePasswordResult = validatePasswordUseCase(state.password)
@@ -63,16 +65,21 @@ class RegisterViewModel @Inject constructor(
                 state.password,
                 state.confirmPassword
             )
-            val validateNameResult=ValidateState(if (state.name.isEmpty()) "Name is required" else null,state.name.isEmpty())
+            val validateShopNameResult = if (state.name.isEmpty()) {
+                ValidateState(valid = false, messge = "Shop Name is require")
+            } else {
+                ValidateState(valid = true)
+            }
             val validateTermsResult = validateAccepteTermsUseCase(state.termsChecked)
             val hasError = listOf(
                 validateEmailResult,
                 validatePasswordResult,
                 validateConfirmPasswordResult,
                 validateTermsResult,
-                validateNameResult
+                validateShopNameResult
             ).any { !it.valid }
             if (hasError) {
+                log("registerSubmit Register viewmodel has error ")
                 state = state.copy(
                     emailError = validateEmailResult.messge,
                     passwordError = validatePasswordResult.messge,
@@ -85,16 +92,59 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private suspend fun register()=withContext(Dispatchers.IO) {
+    private suspend fun register() = withContext(Dispatchers.IO) {
+        log("register Register viewmodel ")
+
         registerUseCase(
             email = state.email,
             pass = state.password,
             name = state.name,
-            ).collect {
-                _isRegister.emit(it)
+        ){
+            log("register Register viewmodel collect ${it} ")
+            when (it) {
+                is ResultState.IsSucsses -> {
+                    state = state.copy(
+                        success = true,
+                        loading = false,
+                        error = null
+                    )
+                }
+                is ResultState.IsError -> {
+                    state = state.copy(
+                        success = false,
+                        loading = false,
+                        error = it.message
+                    )
+                }
+                is ResultState.IsLoading -> {
+                    state = state.copy(
+                        success = false,
+                        loading = true,
+                        error = null
+                    )
+                }
             }
         }
 
+    }
+
+    private fun clearState() {
+        state = state.copy(
+            success = false,
+            loading = false,
+            error = null,
+            email="",
+        emailError=null,
+        password="",
+        passwordError=null,
+        name="",
+        nameError=null,
+        confirmPassword="",
+        confirmPasswordError=null,
+        termsChecked=false,
+        termsError=null,
+        )
+    }
 
     override fun onCleared() {
         super.onCleared()

@@ -2,6 +2,7 @@ package com.example.data.repo
 
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.models.User
+import com.example.core.domain.utils.log
 import com.example.data.remote.FirebaseSource
 import com.example.domain.repo.AuthRepo
 import kotlinx.coroutines.flow.flow
@@ -13,54 +14,52 @@ class AuthRepoImpl @Inject constructor(
 ) :AuthRepo{
 
 
-    private fun saveUser(user: User): ResultState<String> {
-        var response: ResultState<String> = ResultState.IsError("Unknown Error Occurred")
+    private fun saveUser(user: User,result:(ResultState<String>)->Unit){
         firebaseSource.saveUser(user)
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    response= ResultState.IsSucsses(null)
+                    result(ResultState.IsSucsses(null))
                 }else{
-                    response= ResultState.IsError(it.exception?.message?:"Unknown Error")
+                    result(ResultState.IsError(it.exception?.message?:"Unknown Error"))
                 }
             }
-        return response
     }
 
     override suspend fun registerUser(
         user: User,
-        password: String
-    ): ResultState<String> {
-        var result: ResultState<String> = ResultState.IsError("Unknown Error Occurred")
+        password: String,
+        result:(ResultState<String>)->Unit
+    ){
+        log("registerUser repo")
         firebaseSource.createUserWithEmailANdPass(
             email = user.email,
             password = password
         ).addOnCompleteListener {
             if (it.isSuccessful){
-                val responseSaveUser=saveUser(user)
-                result=responseSaveUser
+                saveUser(user) {result ->
+                    result(result)
+                }
             }else{
-                result= ResultState.IsError(it.exception?.message?:"Unknown Error")
+                result(ResultState.IsError(it.exception?.message?:"Unknown Error"))
             }
         }
-        return result
     }
 
     override suspend fun logIn(
         email: String,
-        password: String
-    ): ResultState<String> {
-        var result: ResultState<String> = ResultState.IsError("Unknown Error")
+        password: String,
+        result:(ResultState<String>)->Unit
+    ){
         firebaseSource.singInWithEmail(
             email = email,
             password = password
         ).addOnCompleteListener {
             if (it.isSuccessful){
-                result= ResultState.IsSucsses(null)
+                result(ResultState.IsSucsses(null))
             }else{
-                result= ResultState.IsError(it.exception?.message?:"Unknown Error")
+                result(ResultState.IsError(it.exception?.message?:"Unknown Error"))
             }
         }
-        return result
     }
 
     override suspend fun logout() {

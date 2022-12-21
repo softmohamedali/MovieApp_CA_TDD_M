@@ -7,6 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.models.Screens
+import com.example.core.domain.utils.navOff
 import com.example.presentation.register.component.RegisterView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,11 +20,19 @@ fun RegisterScreen(
 ) {
     val state = registerViewModel.state
     val scope= rememberCoroutineScope()
+    LaunchedEffect(key1 = state.success){
+        if (state.success){
+            scope.launch {
+                delay(2000)
+                navHostController.navOff(Screens.Login.route)
+            }
+        }
+    }
     RegisterView(
         email = state.email,
         emailError = state.emailError,
         password = state.password,
-        passwordError = state.emailError,
+        passwordError = state.passwordError,
         name = state.name,
         nameError = state.nameError,
         confirmPass = state.confirmPassword,
@@ -50,12 +60,7 @@ fun RegisterScreen(
         isLoading = state.loading,
         isSuccess = state.success,
         isError = state.error,
-        onSuccess = {
-            scope.launch {
-                delay(2000)
-                navHostController.popBackStack()
-            }
-        }
+
     )
 
 }

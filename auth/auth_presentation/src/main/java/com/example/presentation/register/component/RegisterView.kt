@@ -46,8 +46,6 @@ fun RegisterView(
     onConfirmPassChange:(String)-> Unit,
     onTermsChange:(Boolean)->Unit,
     onRegisterClick:()->Unit,
-    onSuccess:()->Unit
-
 ){
 
     val scaffoldState = rememberScaffoldState()
@@ -59,13 +57,14 @@ fun RegisterView(
                 scaffoldState.snackbarHostState.showSnackbar("Error:$isError","OK")
             }
         }
+    }
+    LaunchedEffect(key1 = isSuccess){
         if (isSuccess){
             scope.launch {
                 scaffoldState.snackbarHostState.showSnackbar(
-                    message = "succesfuly Register"
+                    message = "successfully Register"
                 )
             }
-            onSuccess()
         }
     }
     Scaffold(
