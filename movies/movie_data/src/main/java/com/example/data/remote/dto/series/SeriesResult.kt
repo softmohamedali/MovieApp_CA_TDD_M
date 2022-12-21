@@ -1,13 +1,13 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.series
 
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieResults(
+data class SeriesResult(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val oneMovies: List<OneMovie>,
+    val results: List<RemoteOneSeries>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")

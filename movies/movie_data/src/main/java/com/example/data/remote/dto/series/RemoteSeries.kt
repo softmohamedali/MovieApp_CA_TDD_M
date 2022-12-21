@@ -1,9 +1,9 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.series
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Tv(
+data class RemoteSeries(
     @SerializedName("backdrop_path")
     val backdropPath: Any,
     @SerializedName("created_by")
@@ -13,7 +13,7 @@ data class Tv(
     @SerializedName("first_air_date")
     val firstAirDate: Any,
     @SerializedName("genres")
-    val genres: List<GenreTV>,
+    val genres: List<GenreSeries>,
     @SerializedName("homepage")
     val homepage: String,
     @SerializedName("id")

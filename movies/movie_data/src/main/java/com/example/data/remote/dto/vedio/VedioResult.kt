@@ -1,11 +1,11 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.vedio
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Vedio(
+data class VedioResult(
     @SerializedName("id")
     val id: Int,
     @SerializedName("results")
-    val results: List<OneVedio>
+    val results: List<RemoteVedio>
 )

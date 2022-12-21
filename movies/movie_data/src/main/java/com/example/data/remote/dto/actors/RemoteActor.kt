@@ -1,9 +1,9 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.actors
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Actor(
+data class RemoteActor(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("also_known_as")

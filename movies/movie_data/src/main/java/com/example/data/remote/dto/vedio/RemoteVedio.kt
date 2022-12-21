@@ -1,9 +1,9 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.vedio
 
 
 import com.google.gson.annotations.SerializedName
 
-data class OneVedio(
+data class RemoteVedio(
     @SerializedName("id")
     val id: String,
     @SerializedName("iso_3166_1")

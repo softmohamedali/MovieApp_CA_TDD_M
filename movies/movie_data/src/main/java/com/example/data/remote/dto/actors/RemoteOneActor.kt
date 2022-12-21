@@ -1,4 +1,4 @@
-package com.example.data.remote.dto
+package com.example.data.remote.dto.actors
 
 
 import android.os.Parcelable
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class OneActor(
+data class RemoteOneActor(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("gender")

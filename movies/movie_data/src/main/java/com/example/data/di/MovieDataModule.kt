@@ -1,6 +1,6 @@
 package com.example.data.di
 
-import com.example.data.remote.RemoteApi
+import com.example.data.remote.RemoteMovieApi
 import com.example.data.remote.RemoteConstants
 import dagger.Module
 import dagger.Provides
@@ -38,10 +38,11 @@ object MovieDataModule {
             .client(client)
             .build()
     }
+
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): RemoteApi
+    fun provideApi(retrofit: Retrofit): RemoteMovieApi
     {
-        return retrofit.create(RemoteApi::class.java)
+        return retrofit.create(RemoteMovieApi::class.java)
     }
 }
