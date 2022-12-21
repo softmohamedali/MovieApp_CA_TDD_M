@@ -4,4 +4,13 @@ apply {
 
 dependencies {
 
+    "implementation"(Retrofit.retrofit)
+    "implementation"(Retrofit.moshiConverter)
+    "implementation"(Retrofit.gsonConverter)
+    "implementation"(Retrofit.scalersConverter)
+    "implementation"(Retrofit.okHttp)
+    "implementation"(Retrofit.okHttpLoggingInterceptor)
+    "implementation"(Retrofit.okhttpsUrlConnection)
+
+
 }
