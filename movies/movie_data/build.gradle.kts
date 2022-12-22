@@ -4,6 +4,8 @@ apply {
 
 dependencies {
 
+    "implementation"(project(Modules.movies_domain))
+    "implementation"(project(Modules.core))
     "implementation"(Retrofit.retrofit)
     "implementation"(Retrofit.moshiConverter)
     "implementation"(Retrofit.gsonConverter)

@@ -26,10 +26,10 @@ interface MoviesRepositry {
         query:HashMap<String,String>
     ):ResultState<Actor>
 
-    suspend fun getVideo(
+    suspend fun getVideos(
         id:Int,
         query:HashMap<String,String>
-    ):ResultState<Video>
+    ):ResultState<List<Video>>
 
     suspend fun getSearchMovie(query:HashMap<String,String>):ResultState<List<MovieItem>>
 }

@@ -14,13 +14,13 @@ import retrofit2.http.QueryMap
 
 interface RemoteMovieApi {
     @GET("discover/movie")
-    suspend fun getPupulateMovie(@QueryMap query:HashMap<String,String>): Response<MovieResult>
+    suspend fun getPopulateMovie(@QueryMap query:HashMap<String,String>): Response<MovieResult>
 
     @GET("discover/tv")
     suspend fun getPopulateSeries(@QueryMap query:HashMap<String,String>):Response<SeriesResult>
 
     @GET("person/popular")
-    suspend fun getPopulatePeople(@QueryMap query:HashMap<String,String>):Response<ActorResult>
+    suspend fun getPopulateActors(@QueryMap query:HashMap<String,String>):Response<ActorResult>
 
     @GET("movie/{movieid}")
     suspend fun getMovie(
@@ -29,19 +29,19 @@ interface RemoteMovieApi {
     ):Response<RemoteMovie>
 
     @GET("/tv/{tv_id}")
-    suspend fun getTv(
+    suspend fun getSeries(
         @Path("tv_id") id:Int,
         @QueryMap query:HashMap<String,String>
     ):Response<RemoteSeries>
 
     @GET("/person/{person_id}")
-    suspend fun getPeople(
+    suspend fun getActor(
         @Path("person_id") id:Int,
         @QueryMap query:HashMap<String,String>
     ):Response<RemoteActor>
 
     @GET("/movie/{idm}/videos")
-    suspend fun getVedio(
+    suspend fun getVideo(
         @Path("idm") id:Int,
         @QueryMap query:HashMap<String,String>
     ):Response<VideoResult>
