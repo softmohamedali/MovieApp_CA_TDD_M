@@ -74,6 +74,8 @@ dependencies {
     implementation(project(Modules.auth_domain))
     implementation(project(Modules.auth_data))
     implementation(project(Modules.movies_presentation))
+    implementation(project(Modules.movies_data))
+    implementation(project(Modules.movies_domain))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
