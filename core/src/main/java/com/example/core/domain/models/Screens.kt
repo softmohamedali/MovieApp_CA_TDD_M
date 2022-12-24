@@ -5,7 +5,7 @@ sealed class Screens(var route:String){
 
     object Login: Screens("login")
     object Register: Screens("register")
-    object Home: Screens("home")
+    object Main: Screens("main")
     object Splash: Screens("splash_screen")
 
 

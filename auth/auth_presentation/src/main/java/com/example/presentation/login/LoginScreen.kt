@@ -1,7 +1,5 @@
 package com.example.presentation.login
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -9,9 +7,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.core.domain.models.Screens
-import com.example.core.domain.utils.navOff
 import com.example.presentation.login.component.LoginView
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -28,7 +24,7 @@ fun LoginScreen (
         if (state.success){
             scope.launch {
                 navHostController.backQueue.clear()
-                navHostController.navigate(Screens.Home.route)
+                navHostController.navigate(Screens.Main.route)
             }
         }
     }
