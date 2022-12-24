@@ -4,7 +4,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.example.core.ui.BG_trans_light
+import com.example.core.ui.Bottom_Nav_Color
+import com.example.core.ui.Main_Color
 import com.example.core.ui.White
 import com.example.domin.models.BottomBarScreen
 import com.example.presentation.main.MainViewModel
@@ -22,7 +25,7 @@ fun HomeBottomBar(
     )
 
     BottomAppBar(
-        backgroundColor = MaterialTheme.colors.background,
+        backgroundColor = Bottom_Nav_Color,
     ){
         for (i in screens.indices){
             AddItem(

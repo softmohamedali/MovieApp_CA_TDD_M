@@ -7,9 +7,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.core.ui.Bottom_Nav_Color
+import com.example.core.ui.Main_Color
 
 @Composable
-fun MainAppBar(
+fun MainTopAppBar(
     title:@Composable ()->Unit={
         Text(text = "Cinema House")
     },
@@ -20,6 +22,7 @@ fun MainAppBar(
             .fillMaxWidth()
             .height(40.dp),
         title =title,
+        backgroundColor = Bottom_Nav_Color,
         actions = {
             actions()
         }

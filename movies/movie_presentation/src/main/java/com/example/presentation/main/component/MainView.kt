@@ -6,6 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.example.core.ui.Main_Color
 import com.example.presentation.actors.ActorsScreen
 import com.example.presentation.favorite.FavoritesScreen
 import com.example.presentation.home.HomeScreen
@@ -20,7 +21,8 @@ fun MainView(
 ) {
 
     Scaffold(
-        topBar = { MainAppBar() },
+        backgroundColor = Main_Color,
+        topBar = { MainTopAppBar() },
         bottomBar = {
             HomeBottomBar(mainViewModel)
         },

@@ -20,7 +20,7 @@ fun SplashScreen (
     splashViewModel: SplashViewModel= hiltViewModel()
 ){
     LaunchedEffect(key1 = true, block = {
-        delay(2000)
+        delay(2)
         if (splashViewModel.getCurrentUser()==null){
             navHostController.navigate(Screens.Login.route)
         }else{

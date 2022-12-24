@@ -13,6 +13,7 @@ val Teal200 = Color(0xFF03DAC5)
 
 
 val Main_Color = Color(0xFF131722)
+val Bottom_Nav_Color = Color(0xFF121620)
 val Teal300 = Color(0xFF03DAC5)
 val Teal400 = Color(0xFF018786)
 val BG_trans_light = Color(0xFF24BAEF)
