@@ -1,16 +1,15 @@
 package com.example.presentation.home
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
+import com.example.core.presentation.Center
 
 @Composable
-fun HomeMovieScreen (
+fun HomeScreen (
     navHostController: NavHostController
 ){
-    Box(contentAlignment = Alignment.Center) {
-        Text(text ="Home")
+    Center {
+        Text(text = "home")
     }
 }

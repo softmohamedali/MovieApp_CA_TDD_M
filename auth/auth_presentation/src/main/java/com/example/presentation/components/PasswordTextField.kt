@@ -14,6 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.auth_presentation.R
 
 @Composable
 fun PasswordTextField(
@@ -40,15 +41,15 @@ fun PasswordTextField(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
                 val image = if (passwordVisible)
-                    androidx.core.R.drawable.notification_bg
-                else androidx.core.R.drawable.notification_bg
+                com.example.core.R.drawable.ic_visible
+                else com.example.core.R.drawable.ic_invisible
 
+                //TODO
                 // Please provide localized description for accessibility services
                 val description = if (passwordVisible) "Hide password" else "Show password"
-
-//                IconButton(onClick = {passwordVisible = !passwordVisible}){
-//                    Icon(painter  = painterResource(id = image), description)
-//                }
+                IconButton(onClick = {passwordVisible = !passwordVisible}){
+                    Icon(painter  = painterResource(id = image), description)
+                }
             },
             isError = isError
         )

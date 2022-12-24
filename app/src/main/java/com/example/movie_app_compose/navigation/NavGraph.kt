@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.core.domain.models.Screens
-import com.example.presentation.home.HomeMovieScreen
+import com.example.presentation.main.MainScreen
 import com.example.presentation.login.LoginScreen
 import com.example.presentation.register.RegisterScreen
 
@@ -14,7 +14,7 @@ import com.example.presentation.register.RegisterScreen
 fun SetupNavigation(
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = Screens.Login.route)
+    NavHost(navController = navController, startDestination = Screens.Home.route)
     {
 //        composable(route = Screens.Splash.route) {
 //            SplashScreen(
@@ -38,7 +38,7 @@ fun SetupNavigation(
             )
         }
         composable(route = Screens.Home.route) {
-            HomeMovieScreen(
+            MainScreen(
                 navHostController = navController,
             )
         }
