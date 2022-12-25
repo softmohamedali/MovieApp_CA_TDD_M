@@ -12,6 +12,8 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 object MovieDomainModule {
 
+
+
     @ViewModelScoped
     @Provides
     fun provideMoviesUseCase(moviesRepositry: MoviesRepositry):MoviesUseCases{
@@ -19,9 +21,9 @@ object MovieDomainModule {
             getActorUseCase= GetActorUseCase(moviesRepositry),
             getMovieUseCase= GetMovieUseCase(moviesRepositry),
             getSeriesUseCase= GetSeriesUseCase(moviesRepositry),
-            getPopulateMovieUseCase= GetPopulateMovieUseCase(moviesRepositry),
-            getPopulateActorUseCase= GetPopulateActorUseCase(moviesRepositry),
-            getPopulateSeriesUseCase= GetPopulateSeriesUseCase(moviesRepositry),
+            getPopularMovieUseCase= GetPopularMovieUseCase(moviesRepositry),
+            getPopularActorUseCase= GetPopularActorUseCase(moviesRepositry),
+            getPopularSeriesUseCase= GetPopularSeriesUseCase(moviesRepositry),
             searchMovieUseCase= SearchMovieUseCase(moviesRepositry)
         )
     }

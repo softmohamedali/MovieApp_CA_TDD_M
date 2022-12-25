@@ -3,4 +3,5 @@ apply {
 }
 
 dependencies {
+    "implementation"(Coil.coilCompose)
 }

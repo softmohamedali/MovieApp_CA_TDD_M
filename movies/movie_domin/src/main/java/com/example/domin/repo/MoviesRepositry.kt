@@ -5,11 +5,11 @@ import com.example.domin.models.*
 
 interface MoviesRepositry {
 
-    suspend fun getPopulateMovie(query:HashMap<String,String>): ResultState<List<MovieItem>>
+    suspend fun getPopularMovie(query:HashMap<String,String>): ResultState<List<MovieItem>>
 
-    suspend fun getPopulateSeries(query:HashMap<String,String>):ResultState<List<SeriesItem>>
+    suspend fun getPopularSeries(query:HashMap<String,String>):ResultState<List<SeriesItem>>
 
-    suspend fun getPopulateActor(query:HashMap<String,String>):ResultState<List<ActorItem>>
+    suspend fun getPopularActor(query:HashMap<String,String>):ResultState<List<ActorItem>>
 
     suspend fun getMovie(
         id:Int,

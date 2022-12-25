@@ -2,9 +2,12 @@ package com.example.data.di
 
 import com.example.data.remote.RemoteMovieApi
 import com.example.data.remote.RemoteConstants
+import com.example.data.repo.MoviesRepositryImp
+import com.example.domin.repo.MoviesRepositry
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -44,5 +47,11 @@ object MovieDataModule {
     fun provideApi(retrofit: Retrofit): RemoteMovieApi
     {
         return retrofit.create(RemoteMovieApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMoviesRepositry(remoteMovieApi: RemoteMovieApi): MoviesRepositry {
+        return MoviesRepositryImp(remoteMovieApi)
     }
 }

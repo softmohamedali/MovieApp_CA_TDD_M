@@ -4,9 +4,9 @@ data class MoviesUseCases(
      val getActorUseCase: GetActorUseCase,
      val getMovieUseCase: GetMovieUseCase,
      val getSeriesUseCase: GetSeriesUseCase,
-     val getPopulateMovieUseCase: GetPopulateMovieUseCase,
-     val getPopulateActorUseCase: GetPopulateActorUseCase,
-     val getPopulateSeriesUseCase: GetPopulateSeriesUseCase,
+     val getPopularMovieUseCase: GetPopularMovieUseCase,
+     val getPopularActorUseCase: GetPopularActorUseCase,
+     val getPopularSeriesUseCase: GetPopularSeriesUseCase,
      val searchMovieUseCase: SearchMovieUseCase
 ) {
 }

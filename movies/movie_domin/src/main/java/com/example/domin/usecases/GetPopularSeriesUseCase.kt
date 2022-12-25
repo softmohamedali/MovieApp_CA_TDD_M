@@ -4,7 +4,7 @@ import com.example.core.domain.models.ResultState
 import com.example.domin.repo.MoviesRepositry
 import kotlinx.coroutines.flow.flow
 
-class GetPopulateActorUseCase (
+class GetPopularSeriesUseCase(
     private  val moviesRepositry: MoviesRepositry
 ) {
 
@@ -12,7 +12,7 @@ class GetPopulateActorUseCase (
         query:HashMap<String,String>
     ) = flow {
         emit(ResultState.IsLoading)
-        val result=moviesRepositry.getPopulateActor(query)
+        val result=moviesRepositry.getPopularSeries(query)
         emit(result)
     }
 

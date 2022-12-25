@@ -23,8 +23,8 @@ fun RemoteOneSeries.toSeriesItem(): SeriesItem {
     )
 }
 
-fun List<RemoteOneSeries>.toListSeriesItems(): List<SeriesItem> {
-    return this.map { it.toSeriesItem() }
+fun List<RemoteOneSeries>?.toListSeriesItems(): List<SeriesItem> {
+    return this?.map { it.toSeriesItem() } ?: listOf()
 }
 
 fun RemoteGenreSeries.toGenreSeries(): GenreSeries {

@@ -1,6 +1,7 @@
 package com.example.data.repo
 
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.utils.log
 import com.example.core.domain.utils.safeCall
 import com.example.data.mapper.*
 import com.example.data.remote.RemoteConstants
@@ -13,29 +14,32 @@ class MoviesRepositryImp @Inject constructor(
     private val remoteMovieApi: RemoteMovieApi
 ): MoviesRepositry {
 
-    override suspend fun getPopulateMovie(query: HashMap<String, String>): ResultState<List<MovieItem>> =
+    override suspend fun getPopularMovie(query: HashMap<String, String>): ResultState<List<MovieItem>> =
         safeCall{
             val response=remoteMovieApi.getPopulateMovie(query)
             if (response.isSuccessful){
                 val movies=response.body()?.remoteOneMovies?.toListMovieItems()
                 ResultState.IsSucsses(movies)
             }else{
+                log(response.message())
                 ResultState.IsError(response.message())
+
             }
         }
 
-    override suspend fun getPopulateSeries(query: HashMap<String, String>):ResultState<List<SeriesItem>> =
-        safeCall{
+    override suspend fun getPopularSeries(query: HashMap<String, String>):ResultState<List<SeriesItem>>
+        {
             val response=remoteMovieApi.getPopulateSeries(query)
             if (response.isSuccessful){
-                val series=response.body()?.results?.toListSeriesItems()
-                ResultState.IsSucsses(series)
+                log("result series ${response.body()?.results}")
+                val series= response.body()?.results?.toListSeriesItems()
+               return  ResultState.IsSucsses(series)
             }else{
-                ResultState.IsError(response.message())
+                return ResultState.IsError(response.message())
             }
         }
 
-    override suspend fun getPopulateActor(query: HashMap<String, String>): ResultState<List<ActorItem>> =
+    override suspend fun getPopularActor(query: HashMap<String, String>): ResultState<List<ActorItem>> =
         safeCall{
             val response=remoteMovieApi.getPopulateActors(query)
             if (response.isSuccessful){
@@ -114,50 +118,4 @@ class MoviesRepositryImp @Inject constructor(
             }
         }
 
-}
-
-
-
-
-class H{
-    fun applyPopularMovie():HashMap<String,String>{
-        val query:HashMap<String,String> =HashMap()
-        query[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        query["page"]="1"
-        query[RemoteConstants.SORTBY_KEY]="popularity.desc"
-        return query
-    }
-
-    fun applyPopularSeries():HashMap<String,String>{
-        val query:HashMap<String,String> =HashMap()
-        query[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        query["page"]="2"
-        query[RemoteConstants.SORTBY_KEY]="popularity.desc"
-        return query
-    }
-
-    fun applyPopularPeople():HashMap<String,String>{
-        val query:HashMap<String,String> =HashMap()
-        query[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        query["page"]="1"
-        return query
-    }
-    fun applyApiKey():HashMap<String,String>{
-        val query:HashMap<String,String> =HashMap()
-        query[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        return query
-    }
-    fun appluQueri(page:String):HashMap<String,String> {
-        val map=HashMap<String,String>()
-        map[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        map["page"]=page
-        return map
-    }
-    fun appluSearchQueri(queryy:String,page:String):HashMap<String,String> {
-        val query:HashMap<String,String> =HashMap()
-        query[RemoteConstants.QUERY_API_KEY]= RemoteConstants.API_KEY
-        query["query"]=queryy
-        query["page"]=page
-        return query
-    }
 }

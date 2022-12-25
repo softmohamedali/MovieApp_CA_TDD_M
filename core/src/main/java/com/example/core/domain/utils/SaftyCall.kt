@@ -6,6 +6,7 @@ suspend fun <T>safeCall(callBack:suspend ()->ResultState<T>):ResultState<T>{
     return try {
         callBack()
     }catch (e:Exception){
+        log("exception"+e.message)
         return ResultState.IsError(e.message?:"Unkown Error")
     }
 }
