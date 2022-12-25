@@ -43,7 +43,7 @@ fun CinemaCard(
             .width(width)
             .height(height)
             .clip(
-            RoundedCornerShape(size = 15.dp))
+            RoundedCornerShape(size = 8.dp))
     ) {
         Box (
             modifier = Modifier
