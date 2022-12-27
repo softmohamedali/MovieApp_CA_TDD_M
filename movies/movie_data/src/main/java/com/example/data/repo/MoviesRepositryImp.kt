@@ -27,15 +27,15 @@ class MoviesRepositryImp @Inject constructor(
             }
         }
 
-    override suspend fun getPopularSeries(query: HashMap<String, String>):ResultState<List<SeriesItem>>
-        {
+    override suspend fun getPopularSeries(query: HashMap<String, String>):ResultState<List<SeriesItem>> =
+        safeCall{
             val response=remoteMovieApi.getPopulateSeries(query)
             if (response.isSuccessful){
                 log("result series ${response.body()?.results}")
                 val series= response.body()?.results?.toListSeriesItems()
-               return  ResultState.IsSucsses(series)
+                ResultState.IsSucsses(series)
             }else{
-                return ResultState.IsError(response.message())
+                ResultState.IsError(response.message())
             }
         }
 

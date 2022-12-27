@@ -3,7 +3,7 @@ object ThirdLib {
     const val pdfItext="com.itextpdf:itextg:5.5.10"
     const val pdfKarumi="com.karumi:dexter:5.0.0"
     const val swipeToRefreshSpeeddial="de.charlex.compose:speeddial:1.0.0-beta03"
-
+    const val swipeToRefreshGo="com.google.accompanist:accompanist-swiperefresh:0.26.0-alpha"
 
     const val eassyPermission="pub.devrel:easypermissions:3.0.0"
 

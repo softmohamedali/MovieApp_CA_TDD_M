@@ -31,5 +31,5 @@ data class RemoteActor(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")
-    val profilePath: Any
+    val profilePath: Any?
 )

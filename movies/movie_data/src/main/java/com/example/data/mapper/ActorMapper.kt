@@ -10,10 +10,10 @@ fun RemoteOneActor.toActorItem(): ActorItem {
         adult = this.adult,
         gender = this.gender,
         id = this.id,
-        knownForDepartment = this.knownForDepartment,
+        knownForDepartment = this.knownForDepartment?:"",
         name = this.name,
         popularity = this.popularity,
-        profilePath = this.profilePath
+        profilePath = this.profilePath?:""
     )
 }
 
@@ -29,7 +29,7 @@ fun RemoteActor.toActor(): Actor {
         knownForDepartment = this.knownForDepartment,
         name = this.name,
         popularity = this.popularity,
-        profilePath = this.profilePath,
+        profilePath = this.profilePath?:"",
         alsoKnownAs = this.alsoKnownAs,
         biography = this.biography,
         birthday = this.birthday,

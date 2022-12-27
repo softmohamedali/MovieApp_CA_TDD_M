@@ -14,11 +14,11 @@ data class RemoteOneActor(
     @SerializedName("id")
     val id: Int,
     @SerializedName("known_for_department")
-    val knownForDepartment: String,
+    val knownForDepartment: String?,
     @SerializedName("name")
     val name: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")
-    val profilePath: String
+    val profilePath: String?
 ):Parcelable

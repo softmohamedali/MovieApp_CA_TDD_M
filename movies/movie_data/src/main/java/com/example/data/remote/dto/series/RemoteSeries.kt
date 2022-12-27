@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteSeries(
     @SerializedName("backdrop_path")
-    val backdropPath: Any,
+    val backdropPath: Any?,
     @SerializedName("created_by")
     val createdBy: List<Any>,
     @SerializedName("episode_run_time")
@@ -47,7 +47,7 @@ data class RemoteSeries(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: Any,
+    val posterPath: Any?,
     @SerializedName("production_companies")
     val productionCompanies: List<Any>,
     @SerializedName("production_countries")

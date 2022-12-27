@@ -11,14 +11,14 @@ import com.example.domin.models.MovieItem
 fun RemoteOneMovie.toMovieItem(): MovieItem {
     return MovieItem(
         adult = this.adult,
-        backdropPath = this.backdropPath,
+        backdropPath = this.backdropPath?:"",
         genreIds = this.genreIds,
         id = this.id,
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         releaseDate = this.releaseDate,
         title = this.title,
         video = this.video,
@@ -43,13 +43,13 @@ fun List<RemoteGenreMovie>.toListGenreSeries(): List<GenreMovie> {
 fun RemoteMovie.toMovie(): Movie {
     return Movie(
         adult = this.adult,
-        backdropPath = this.backdropPath,
+        backdropPath = this.backdropPath?:"",
         id = this.id,
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         releaseDate = this.releaseDate,
         title = this.title,
         video = this.video,

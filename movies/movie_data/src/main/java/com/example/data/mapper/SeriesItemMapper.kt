@@ -7,7 +7,7 @@ import com.example.domin.models.*
 
 fun RemoteOneSeries.toSeriesItem(): SeriesItem {
     return SeriesItem(
-        backdropPath = this.backdropPath,
+        backdropPath = this.backdropPath?:"",
         firstAirDate = this.firstAirDate,
         genreIds = this.genreIds,
         id = this.id,
@@ -17,7 +17,7 @@ fun RemoteOneSeries.toSeriesItem(): SeriesItem {
         originalName = this.originalName,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         voteAverage = this.voteAverage,
         voteCount = this.voteCount
     )
@@ -37,12 +37,12 @@ fun List<RemoteGenreSeries>.toListGenreSeries(): List<GenreSeries> {
 
 fun RemoteSeries.toSeries(): Series {
     return Series(
-        backdropPath = this.backdropPath,
+        backdropPath = this.backdropPath?:"",
         id = this.id,
         originalLanguage = this.originalLanguage,
         overview = this.overview,
         popularity = this.popularity,
-        posterPath = this.posterPath,
+        posterPath = this.posterPath?:"",
         voteAverage = this.voteAverage,
         voteCount = this.voteCount,
         homepage = this.homepage,

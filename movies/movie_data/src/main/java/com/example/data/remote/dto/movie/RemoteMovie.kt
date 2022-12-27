@@ -7,7 +7,7 @@ data class RemoteMovie(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerializedName("budget")
     val budget: Int,
     @SerializedName("genres")
@@ -27,7 +27,7 @@ data class RemoteMovie(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("revenue")

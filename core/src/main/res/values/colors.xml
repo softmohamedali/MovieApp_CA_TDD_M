@@ -14,6 +14,7 @@
     <color name="bg_trans_parent">#9924BAEF</color>
     <color name="font">#FFFFFFFF</color>
     <color name="red">#F61A1A</color>
+    <color name="error">#F61A1A</color>
     <color name="hint">#5C5E68</color>
     <color name="font_title">#F8D6BA</color>
     <color name="border_color">#a8a8a83d</color>

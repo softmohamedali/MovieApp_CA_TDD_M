@@ -6,8 +6,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.core.ui.BG_trans_light
 import com.example.core.ui.Loading_Back
 import com.example.core.ui.None
+import com.example.core.ui.White
 
 @Composable
 fun LoadingLayer() {
@@ -16,6 +18,8 @@ fun LoadingLayer() {
             .fillMaxSize(),
         color = Loading_Back
     ) {
-        Center { CircularProgressIndicator() }
+        Center { CircularProgressIndicator(
+            color = BG_trans_light
+        ) }
     }
 }
