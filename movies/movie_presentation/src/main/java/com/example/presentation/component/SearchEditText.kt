@@ -35,7 +35,9 @@ fun SearchEditText(
         textStyle = TextStyle(
             color = Search_Text
         ),
-
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Search, contentDescription ="")
+        },
         readOnly=readOnly,
         enabled =readOnly,
         colors = TextFieldDefaults.textFieldColors(
