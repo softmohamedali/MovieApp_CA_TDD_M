@@ -3,6 +3,7 @@ package com.example.presentation.component
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -35,7 +36,9 @@ fun CinemaCard(
     name:String=" aminzing name your aere naeverr beem watched",
     height:Dp=190.dp,
     width:Dp=140.dp,
-    showRate:Boolean=true
+    showRate:Boolean=true,
+    id:Int,
+    onCardClick:(Int)->Unit
 ){
     val painter = rememberImagePainter(
         data =  BASE_IMG_URL+image,
@@ -47,6 +50,9 @@ fun CinemaCard(
             .height(height)
             .clip(
             RoundedCornerShape(size = 8.dp))
+            .clickable {
+                onCardClick(id)
+            }
     ) {
         Box (
             modifier = Modifier

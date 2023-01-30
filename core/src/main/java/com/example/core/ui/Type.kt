@@ -12,6 +12,18 @@ val textBold1=TextStyle(
     fontWeight = FontWeight.ExtraBold,
     fontSize = 20.sp
 )
+
+object CimaTextStyle{
+    val normalText=TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 15.sp
+    )
+    val normalTitle=TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+    )
+}
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,

@@ -22,7 +22,9 @@ fun HomeView (
     popularMovie:List<MovieItem> = listOf(),
     popularSeries:List<SeriesItem> = listOf(),
     popularActors:List<ActorItem> = listOf(),
-    onSwipeToResfresh:()->Unit
+    onSwipeToResfresh:()->Unit,
+    onCardClick:(Int)->Unit
+
 ){
     val scrollState= rememberScrollState()
     val swipeRefreshState = rememberSwipeRefreshState(loading)
@@ -52,7 +54,10 @@ fun HomeView (
                                 .verticalScroll(scrollState)
                         ) {
                             ListCinemaMovieComponent(
-                                listItems = popularMovie
+                                listItems = popularMovie,
+                                onCardClick = {id->
+                                    onCardClick(id)
+                                }
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             ListCinemaSeriesComponent(

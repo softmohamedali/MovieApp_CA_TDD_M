@@ -19,7 +19,8 @@ fun ListCinemaMovieComponent (
     listTypeText:String="Popular Movie",
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
-    listItems:List<MovieItem> = listOf()
+    listItems:List<MovieItem> = listOf(),
+    onCardClick:(Int)->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -35,11 +36,15 @@ fun ListCinemaMovieComponent (
             color = White
         )
         LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(listItems.size){
+            items(listItems.size){ it ->
                 CinemaCard(
                     name =listItems[it].originalTitle,
                     image = listItems[it].posterPath,
-                    rate = listItems[it].voteAverage.toString()
+                    rate = listItems[it].voteAverage.toString(),
+                    id=listItems[it].id,
+                    onCardClick = {id->
+                        onCardClick(id)
+                    }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
@@ -73,7 +78,11 @@ fun ListCinemaSeriesComponent (
                 CinemaCard(
                     name =listItems[it].name?:"",
                     image = listItems[it].posterPath?:"",
-                    rate = listItems[it].voteAverage.toString()
+                    rate = listItems[it].voteAverage.toString(),
+                    id=listItems[it].id,
+                    onCardClick = {
+
+                    }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
@@ -107,7 +116,11 @@ fun ListCinemaActorsComponent (
                 CinemaCard(
                     name =listItems[it].name,
                     image = listItems[it].profilePath,
-                    showRate = false
+                    showRate = false,
+                    id=listItems[it].id,
+                    onCardClick = {
+
+                    }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }

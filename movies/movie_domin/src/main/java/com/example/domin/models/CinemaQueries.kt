@@ -30,13 +30,13 @@ object CinemaQueries {
         query[MovieDomainConstants.QUERY_API_KEY]= MovieDomainConstants.API_KEY
         return query
     }
-    fun appluQueri(page:String):HashMap<String,String> {
+    fun applyQueri(page:String):HashMap<String,String> {
         val map=HashMap<String,String>()
         map[MovieDomainConstants.QUERY_API_KEY]= MovieDomainConstants.API_KEY
         map["page"]=page
         return map
     }
-    fun appluSearchQueri(queryy:String,page:String):HashMap<String,String> {
+    fun applySearchQueri(queryy:String, page:String):HashMap<String,String> {
         val query:HashMap<String,String> =HashMap()
         query[MovieDomainConstants.QUERY_API_KEY]= MovieDomainConstants.API_KEY
         query["query"]=queryy

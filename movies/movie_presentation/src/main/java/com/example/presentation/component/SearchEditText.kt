@@ -36,14 +36,16 @@ fun SearchEditText(
             color = Search_Text
         ),
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription ="")
+                      Icon(imageVector = Icons.Default.Search, contentDescription ="" )
         },
         readOnly=readOnly,
-        enabled =readOnly,
+        enabled = readOnly,
         colors = TextFieldDefaults.textFieldColors(
             cursorColor=BG_trans_light,
             focusedIndicatorColor=BG_trans_light,
             focusedLabelColor=BG_trans_light,
+            disabledIndicatorColor=BG_trans_light,
+            disabledLabelColor=BG_trans_light,
         )
     )
 }
