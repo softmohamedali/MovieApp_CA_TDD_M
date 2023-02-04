@@ -14,6 +14,13 @@ val textBold1=TextStyle(
 )
 
 object CimaTextStyle{
+
+    val smallTextBold=TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold
+    )
+
     val normalText=TextStyle(
         fontFamily = FontFamily.Default,
         fontSize = 15.sp

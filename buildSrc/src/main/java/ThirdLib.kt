@@ -7,7 +7,8 @@ object ThirdLib {
 
     const val eassyPermission="pub.devrel:easypermissions:3.0.0"
 
-
+    const val exoPlayer="com.google.android.exoplayer:exoplayer:2.18.1"
+    const val youtubePlayer="com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0"
 //    accompanist_version='0.21.2-beta'
 //    // Horizontal Pager and Indicators - Accompanist
 //    implementation "com.google.accompanist:accompanist-pager:$accompanist_version"

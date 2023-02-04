@@ -28,19 +28,19 @@ interface RemoteMovieApi {
         @QueryMap query:HashMap<String,String>
     ):Response<RemoteMovie>
 
-    @GET("/tv/{tv_id}")
+    @GET("tv/{tv_id}")
     suspend fun getSeries(
         @Path("tv_id") id:Int,
         @QueryMap query:HashMap<String,String>
     ):Response<RemoteSeries>
 
-    @GET("/person/{person_id}")
+    @GET("person/{person_id}")
     suspend fun getActor(
         @Path("person_id") id:Int,
         @QueryMap query:HashMap<String,String>
     ):Response<RemoteActor>
 
-    @GET("/movie/{idm}/videos")
+    @GET("movie/{idm}/videos")
     suspend fun getVideo(
         @Path("idm") id:Int,
         @QueryMap query:HashMap<String,String>

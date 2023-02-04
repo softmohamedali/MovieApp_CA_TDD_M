@@ -8,6 +8,7 @@ data class DetailsState(
     val success:Boolean=false,
     val error:String?=null,
     val movieId:Int=-1,
-    val movie:Movie?=null,
+    val movie:Movie=Movie(),
+    val trailerUrl:String?=null,
 ) {
 }

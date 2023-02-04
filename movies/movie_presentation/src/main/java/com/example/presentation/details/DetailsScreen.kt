@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.core.presentation.BackButton
 import com.example.core.ui.Main_Color
 import com.example.presentation.details.components.DetailsView
 import com.example.presentation.main.component.MainTopAppBar
@@ -24,19 +25,13 @@ fun DetailsScreen(
         detailsViewModel.onEvent(DetailsEvent.SetMovieId(movie_id))
     }
     val state = detailsViewModel.state
-    Scaffold(
-        modifier=Modifier.fillMaxSize(),
-        backgroundColor = Main_Color,
-        topBar = { MainTopAppBar() },
-        content = {
-
-            if (state.movie != null) {
-                DetailsView(
-                    loading = state.loading,
-                    error = state.error,
-                    movie = state.movie
-                )
-            }
+    DetailsView(
+        loading = state.loading,
+        error = state.error,
+        movie = state.movie,
+        trailerUrl = state.trailerUrl?:"",
+        onBackClick = {
+            navHostController.popBackStack()
         }
     )
 
