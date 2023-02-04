@@ -1,10 +1,12 @@
 package com.example.presentation.details.components
 
-import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
@@ -17,7 +19,6 @@ import com.example.movie_presentation.R
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -53,7 +54,6 @@ fun VideoView(
 }
 
 
-
 @Composable
 fun YoutubeScreen(
     videoId:String
@@ -83,6 +83,33 @@ fun YoutubeScreen(
         )
     }
 }
+
+
+
+//
+//@Composable
+//fun YoutubeScreen(
+//    videoId:String
+//) {
+//    val ctx = LocalContext.current
+//    AndroidView(factory = {
+//
+//        var view=YouTubePlayerView(it)
+//        val fragment = view.addYouTubePlayerListener(
+//            object : AbstractYouTubePlayerListener() {
+//
+//                override fun onReady(youTubePlayer: YouTubePlayer) {
+//                    super.onReady(youTubePlayer)
+//                    youTubePlayer.loadVideo(videoId, 0f)
+//                }
+//
+//
+//            }
+//        )
+//
+//        view
+//    })
+//}
 
 
 
