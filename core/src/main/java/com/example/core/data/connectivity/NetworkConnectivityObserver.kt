@@ -1,8 +1,10 @@
 package com.example.core.data.connectivity
 
+import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.core.domain.connectivity.ConnectivityObserver
@@ -15,9 +17,8 @@ import kotlinx.coroutines.launch
 
 class NetworkConnectivityObserver(context:Context):ConnectivityObserver {
 
-    val connectivityManger=context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private val connectivityManger=context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    @RequiresApi(Build.VERSION_CODES.N)
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun observer(): Flow<ConnectivityObserver.ConnectivityStatus> {
         return  callbackFlow {
@@ -48,5 +49,20 @@ class NetworkConnectivityObserver(context:Context):ConnectivityObserver {
                 connectivityManger.unregisterNetworkCallback(callBack)
             }
         }.distinctUntilChanged()
+    }
+
+
+
+    override fun hasInternetConnection(): Boolean {
+        val netWorkActive = connectivityManger.activeNetwork ?: return false
+        val networkCapability =
+            connectivityManger.getNetworkCapabilities(netWorkActive) ?: return false
+        when {
+            networkCapability.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> return true
+            networkCapability.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> return true
+            networkCapability.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> return true
+            else -> return false
+        }
+
     }
 }

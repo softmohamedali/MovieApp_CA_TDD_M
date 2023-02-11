@@ -2,6 +2,7 @@ package com.example.core.di
 
 import android.app.Application
 import coil.ImageLoader
+import com.example.core.data.connectivity.NetworkConnectivityObserver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +23,12 @@ object AppModule {
 
             }
             .build()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideConnectivityObserver(@ApplicationContext app: Application):NetworkConnectivityObserver {
+        return NetworkConnectivityObserver(app)
     }
 }
