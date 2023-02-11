@@ -5,6 +5,7 @@ import com.example.data.remote.dto.actors.RemoteOneActor
 import com.example.domin.models.Actor
 import com.example.domin.models.ActorItem
 
+
 fun RemoteOneActor.toActorItem(): ActorItem {
     return ActorItem(
         adult = this.adult,

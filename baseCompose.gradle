@@ -71,6 +71,8 @@ dependencies {
     androidTestImplementation Testing.turbine
     androidTestImplementation Testing.composeUiTest
     androidTestImplementation Testing.mockk
+    androidTestImplementation Testing.testRunner
     androidTestImplementation Testing.mockWebServer
     androidTestImplementation Testing.hiltTesting
+    kaptAndroidTest Testing.hiltTesting
 }
