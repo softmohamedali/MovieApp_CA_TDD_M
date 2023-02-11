@@ -1,6 +1,7 @@
 package com.example.movie_app_compose.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -16,10 +17,13 @@ import com.example.presentation.splash.SplashScreen
 
 @Composable
 fun SetupNavigation(
+    modifier: Modifier,
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = Screens.Splash.route)
-    {
+    NavHost(
+        modifier = modifier,
+        navController = navController, startDestination = Screens.Splash.route
+    ) {
         composable(route = Screens.Splash.route) {
             SplashScreen(
                 navHostController = navController,

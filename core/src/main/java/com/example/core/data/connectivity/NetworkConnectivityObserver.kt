@@ -8,14 +8,16 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.core.domain.connectivity.ConnectivityObserver
+import com.example.core.domain.utils.log
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NetworkConnectivityObserver(context:Context):ConnectivityObserver {
+class NetworkConnectivityObserver @Inject constructor(context:Context):ConnectivityObserver {
 
     private val connectivityManger=context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

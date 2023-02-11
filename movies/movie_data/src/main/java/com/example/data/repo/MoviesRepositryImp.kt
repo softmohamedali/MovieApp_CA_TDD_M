@@ -1,5 +1,6 @@
 package com.example.data.repo
 
+import com.example.core.data.connectivity.NetworkConnectivityObserver
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.log
 import com.example.core.domain.utils.safeCall
@@ -11,7 +12,7 @@ import com.example.domin.repo.MoviesRepositry
 import javax.inject.Inject
 
 class MoviesRepositryImp @Inject constructor(
-    private val remoteMovieApi: RemoteMovieApi
+    private val remoteMovieApi: RemoteMovieApi,
 ): MoviesRepositry {
 
     override suspend fun getPopularMovie(query: HashMap<String, String>): ResultState<List<MovieItem>> =
