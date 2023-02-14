@@ -19,11 +19,57 @@ import com.example.core.ui.CimaTextStyle.smallTextBold
 import com.example.core.ui.Title200
 import com.example.core.ui.White
 import com.example.domin.models.GenreMovie
+import com.example.domin.models.GenreSeries
 
 
 @Composable
 fun TypeMovieList(
     types:List<GenreMovie>,
+    name:String,
+){
+
+    Row (
+        modifier = Modifier.fillMaxWidth()
+    ){
+        Text(
+            text = "$name : ",
+            style = normalText,
+            color = Title200
+        )
+        LazyVerticalGrid(
+            userScrollEnabled = false,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(((types.size/3)*40).dp)
+            ,
+            columns = GridCells.Fixed(3),
+            content ={
+                items(types.size){
+                    Text(
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(BG_trans_light)
+                            .padding(vertical = 5.dp, horizontal = 10.dp)
+
+                        ,
+                        text =types[it].name,
+                        color = White,
+                        style = smallTextBold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+
+            }
+        )
+
+    }
+}
+
+
+@Composable
+fun TypeSeriesList(
+    types:List<GenreSeries>,
     name:String,
 ){
 

@@ -113,6 +113,16 @@ dependencies {
     androidTestImplementation(Testing.hiltTesting)
     kaptAndroidTest(DaggerHilt.hiltCompiler)
     androidTestImplementation(Testing.testRunner)
+
+
+
+    
+
+    //testing purpuse
+    implementation (platform(Firebase.firebasePlatform))
+    implementation (Firebase.firebaseAnalytics)
+    implementation (Firebase.firebaseAuth)
+    implementation (Firebase.firebaseFirestore)
 }
 
 

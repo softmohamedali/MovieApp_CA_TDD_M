@@ -58,7 +58,8 @@ fun ListCinemaSeriesComponent (
     listTypeText:String="Popular Series",
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
-    listItems:List<SeriesItem> = listOf()
+    listItems:List<SeriesItem> = listOf(),
+    onCardClick:(Int)->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -80,8 +81,8 @@ fun ListCinemaSeriesComponent (
                     image = listItems[it].posterPath?:"",
                     rate = listItems[it].voteAverage.toString(),
                     id=listItems[it].id,
-                    onCardClick = {
-
+                    onCardClick = { id->
+                        onCardClick(id)
                     }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
@@ -96,7 +97,8 @@ fun ListCinemaActorsComponent (
     listTypeText:String="Popular Actors",
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
-    listItems:List<ActorItem> = listOf()
+    listItems:List<ActorItem> = listOf(),
+    onCardClick:(Int)->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -118,8 +120,8 @@ fun ListCinemaActorsComponent (
                     image = listItems[it].profilePath,
                     showRate = false,
                     id=listItems[it].id,
-                    onCardClick = {
-
+                    onCardClick = {id->
+                        onCardClick(id)
                     }
                 )
                 Spacer(modifier = Modifier.width(8.dp))

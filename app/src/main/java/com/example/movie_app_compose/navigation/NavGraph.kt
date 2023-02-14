@@ -8,10 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.core.domain.models.Screens
-import com.example.presentation.details.DetailsScreen
+import com.example.presentation.details.actors_details.DetailsActorScreen
+import com.example.presentation.details.movie_detals.MovieDetailsScreen
+import com.example.presentation.details.series_details.DetailsSeriesScreen
 import com.example.presentation.main.MainScreen
 import com.example.presentation.login.LoginScreen
 import com.example.presentation.register.RegisterScreen
+import com.example.presentation.series.SeriesScreen
 import com.example.presentation.splash.SplashScreen
 
 
@@ -49,7 +52,7 @@ fun SetupNavigation(
             )
         }
         composable(
-            route = Screens.Details.route,
+            route = Screens.MovieDetails.route,
             arguments = listOf(
                 navArgument("id"){
                     type= NavType.IntType
@@ -57,7 +60,35 @@ fun SetupNavigation(
             )
         ) {
             val movie_Id=it.arguments!!.getInt("id")
-            DetailsScreen(
+            MovieDetailsScreen(
+                navHostController = navController,
+                movie_Id
+            )
+        }
+        composable(
+            route = Screens.SeriesDetails.route,
+            arguments = listOf(
+                navArgument("id"){
+                    type= NavType.IntType
+                }
+            )
+        ) {
+            val movie_Id=it.arguments!!.getInt("id")
+            DetailsSeriesScreen(
+                navHostController = navController,
+                movie_Id
+            )
+        }
+        composable(
+            route = Screens.ActorDetails.route,
+            arguments = listOf(
+                navArgument("id"){
+                    type= NavType.IntType
+                }
+            )
+        ) {
+            val movie_Id=it.arguments!!.getInt("id")
+            DetailsActorScreen(
                 navHostController = navController,
                 movie_Id
             )

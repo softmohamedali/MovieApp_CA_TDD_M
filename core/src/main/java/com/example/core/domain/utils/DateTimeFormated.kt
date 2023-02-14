@@ -2,6 +2,7 @@ package com.example.core.domain.utils
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.random.Random
 
 object DateTimeFormated {
 
@@ -34,5 +35,13 @@ object DateTimeFormated {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm")
         return current.format(formatter)
+    }
+
+    fun getCurrentTimeWithHourNormal():String{
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm")
+        val formatted = current.format(formatter)
+//        Calendar.getInstance().time.time
+        return formatted + Random.nextInt()
     }
 }

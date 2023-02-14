@@ -21,8 +21,14 @@ fun HomeScreen(
         onSwipeToResfresh = {
             homeViewModel.onEvent(HomeEvent.OnSwipeRefresh)
         },
-        onCardClick = {id->
-            navHostController.navigate(Screens.Details.navToDetailsWithId(id))
+        onMovieCardClick = { id ->
+            navHostController.navigate(Screens.MovieDetails.navToMovieDetailsWithId(id))
+        },
+        onSeriesCardClick = { id ->
+            navHostController.navigate(Screens.SeriesDetails.navToSeriesDetailsWithId(id))
+        },
+        onActorCardClick = { id ->
+            navHostController.navigate(Screens.ActorDetails.navToActorDetailsWithId(id))
         }
     )
 }

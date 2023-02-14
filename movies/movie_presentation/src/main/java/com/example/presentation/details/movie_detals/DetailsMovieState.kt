@@ -1,9 +1,8 @@
-package com.example.presentation.details
+package com.example.presentation.details.movie_detals
 
 import com.example.domin.models.Movie
-import com.example.domin.models.MovieItem
 
-data class DetailsState(
+data class DetailsMovieState(
     val loading:Boolean=false,
     val success:Boolean=false,
     val error:String?=null,

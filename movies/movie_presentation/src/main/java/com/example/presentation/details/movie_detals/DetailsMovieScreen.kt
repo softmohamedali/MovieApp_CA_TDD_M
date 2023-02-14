@@ -1,20 +1,15 @@
-package com.example.presentation.details
+package com.example.presentation.details.movie_detals
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.core.presentation.BackButton
-import com.example.core.ui.Main_Color
-import com.example.presentation.details.components.DetailsView
-import com.example.presentation.main.component.MainTopAppBar
+import com.example.presentation.details.DetailsEvent
+import com.example.presentation.details.DetailsViewModel
+import com.example.presentation.details.components.DetailsMovieView
 
 @Composable
-fun DetailsScreen(
+fun MovieDetailsScreen(
     navHostController: NavHostController,
     movie_id: Int,
     detailsViewModel: DetailsViewModel = hiltViewModel()
@@ -22,10 +17,10 @@ fun DetailsScreen(
     LaunchedEffect(
         key1 = true,
     ) {
-        detailsViewModel.onEvent(DetailsEvent.SetMovieId(movie_id))
+        detailsViewModel.onEvent(DetailsEvent.StartScreenSetMovieId(movie_id))
     }
-    val state = detailsViewModel.state
-    DetailsView(
+    val state = detailsViewModel.stateMovie
+    DetailsMovieView(
         loading = state.loading,
         error = state.error,
         movie = state.movie,

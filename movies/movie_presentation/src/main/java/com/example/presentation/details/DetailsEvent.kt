@@ -1,5 +1,7 @@
 package com.example.presentation.details
 
 sealed class DetailsEvent {
-    class SetMovieId(var id:Int):DetailsEvent()
+    class StartScreenSetMovieId(var id:Int):DetailsEvent()
+    class StartScreenSetSeriesId(var id:Int):DetailsEvent()
+    class StartScreenSetActorId(var id:Int):DetailsEvent()
 }
