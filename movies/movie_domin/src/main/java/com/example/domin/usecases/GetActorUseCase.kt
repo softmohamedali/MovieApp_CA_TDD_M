@@ -1,6 +1,7 @@
 package com.example.domin.usecases
 
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.utils.log
 import com.example.domin.repo.MoviesRepositry
 import kotlinx.coroutines.flow.flow
 
@@ -14,6 +15,7 @@ class GetActorUseCase(
     ) = flow {
         emit(ResultState.IsLoading)
         val result=moviesRepositry.getActor(id,query)
+        log("GetActorUseCase:result is  ${result.data} id:${id}")
         emit(result)
     }
 

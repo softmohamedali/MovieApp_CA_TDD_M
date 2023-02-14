@@ -23,15 +23,17 @@ fun DetailsActorScreen(
     }
     val state = detailsViewModel.stateActor
 
-    if (state.actor!=null)
-    DetailsActorView(
-        loading = state.loading,
-        error = state.error,
-        actor = state.actor,
-        trailerUrl = state.trailerUrl?:"",
-        onBackClick = {
-            navHostController.popBackStack()
-        }
-    )
+    if (state.actor!=null){
+        DetailsActorView(
+            loading = state.loading,
+            error = state.error,
+            actor = state.actor,
+            trailerUrl = state.trailerUrl?:"",
+            onBackClick = {
+                navHostController.popBackStack()
+            }
+        )
+    }
+
 
 }

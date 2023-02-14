@@ -13,11 +13,11 @@ data class RemoteActor(
     @SerializedName("birthday")
     val birthday: String,
     @SerializedName("deathday")
-    val deathday: Any,
+    val deathday: Any?,
     @SerializedName("gender")
     val gender: Int,
     @SerializedName("homepage")
-    val homepage: Any,
+    val homepage: Any?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("imdb_id")

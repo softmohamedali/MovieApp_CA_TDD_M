@@ -16,6 +16,7 @@ suspend fun <T>safeCall(callBack:suspend ()->ResultState<T>):ResultState<T>{
 
     }
     catch (e:Exception){
+        log("safe call exception ${e.message}")
         return ResultState.IsError(e.message?:UiText.unknownError().toString())
     }
 }

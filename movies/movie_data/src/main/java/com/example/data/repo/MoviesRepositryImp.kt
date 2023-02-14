@@ -1,11 +1,9 @@
 package com.example.data.repo
 
-import com.example.core.data.connectivity.NetworkConnectivityObserver
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.log
 import com.example.core.domain.utils.safeCall
 import com.example.data.mapper.*
-import com.example.data.remote.RemoteConstants
 import com.example.data.remote.RemoteMovieApi
 import com.example.domin.models.*
 import com.example.domin.repo.MoviesRepositry
@@ -59,8 +57,8 @@ class MoviesRepositryImp @Inject constructor(
         safeCall{
             val response=remoteMovieApi.getMovie(id, query)
             if (response.isSuccessful){
-                val series=response.body()?.toMovie()
-                ResultState.IsSucsses(series)
+                val movie=response.body()?.toMovie()
+                ResultState.IsSucsses(movie)
             }else{
                 ResultState.IsError(response.message())
             }
@@ -86,9 +84,11 @@ class MoviesRepositryImp @Inject constructor(
     ): ResultState<Actor> =
         safeCall{
             val response=remoteMovieApi.getActor(id, query)
+            log("GetActorUseCase:result is  ${response.body()} id:${id} is ${response.isSuccessful}")
             if (response.isSuccessful){
-                val series=response.body()?.toActor()
-                ResultState.IsSucsses(series)
+                val actor=response.body()?.toActor()
+                log("GetActorUseCase:result is  ${response.body()} id:${id} actor ${actor}")
+                ResultState.IsSucsses(actor)
             }else{
                 ResultState.IsError(response.message())
             }
