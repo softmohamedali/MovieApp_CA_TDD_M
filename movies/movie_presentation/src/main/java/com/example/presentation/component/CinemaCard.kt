@@ -38,14 +38,15 @@ fun CinemaCard(
     width:Dp=140.dp,
     showRate:Boolean=true,
     id:Int,
-    onCardClick:(Int)->Unit
+    onCardClick:(Int)->Unit,
+    modifier: Modifier=Modifier
 ){
     val painter = rememberImagePainter(
         data =  BASE_IMG_URL+image,
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(width)
             .height(height)
             .clip(
