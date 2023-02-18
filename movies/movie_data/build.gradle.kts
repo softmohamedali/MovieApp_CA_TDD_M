@@ -2,6 +2,7 @@ apply {
     from("$rootDir/base.gradle")
 }
 
+
 dependencies {
 
     "implementation"(project(Modules.movies_domain))
@@ -13,6 +14,12 @@ dependencies {
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.okHttpLoggingInterceptor)
     "implementation"(Retrofit.okhttpsUrlConnection)
+
+
+
+    "implementation"(Room.roomKtx)
+    "implementation"(Room.roomRuntime)
+    "kapt"(Room.roomCompiler)
 
 
 }

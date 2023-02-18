@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id ("com.google.gms.google-services")
+
 }
 
 android {
@@ -116,9 +117,8 @@ dependencies {
 
 
 
-    
 
-    //testing purpuse
+            //testing purpuse
     implementation (platform(Firebase.firebasePlatform))
     implementation (Firebase.firebaseAnalytics)
     implementation (Firebase.firebaseAuth)

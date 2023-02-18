@@ -8,4 +8,6 @@ object Build {
     const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltAndroidGradlePluginVersion"
 
     const val googleServices="com.google.gms:google-services:4.3.13"
+
+    const val kotlinSerilization="org.jetbrains.kotlin:kotlin-serialization:1.5.21"
 }

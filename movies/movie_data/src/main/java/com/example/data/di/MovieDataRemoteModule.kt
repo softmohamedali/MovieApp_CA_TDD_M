@@ -7,7 +7,6 @@ import com.example.domin.repo.MoviesRepositry
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -18,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object MovieDataModule {
+object MovieDataRemoteModule {
 
     @Provides
     @Singleton

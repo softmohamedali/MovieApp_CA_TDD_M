@@ -19,4 +19,12 @@ object MovieDomainConstants {
     const val DATASTORE_NAME="datastore_movie"
     const val SORTBY_KEY="sortby"
     const val SORTBY_IDKEY="sortbyId"
+
+
+    //Local DatabaseVariable
+    const val ACTOR_ENTITY_NAME="actors"
+    const val MOVIE_ENTITY_NAME="movie"
+    const val SERIES_ENTITY_NAME="series"
+    const val MOVIE_DATABASE_NAME="series"
+
 }

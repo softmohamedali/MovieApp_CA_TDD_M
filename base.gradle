@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
+
 android {
     compileSdk ProjectConfig.compileSdk
 
@@ -63,6 +65,9 @@ dependencies {
     androidTestImplementation Testing.mockWebServer
     androidTestImplementation Testing.hiltTesting
     kaptAndroidTest Testing.hiltTesting
+
+
+    implementation Kotlin.KotlinSerilization
 }
 
 
