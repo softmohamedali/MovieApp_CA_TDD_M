@@ -7,17 +7,17 @@ data class RemoteActor(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("also_known_as")
-    val alsoKnownAs: List<Any>,
+    val alsoKnownAs: List<String>,
     @SerializedName("biography")
     val biography: String,
     @SerializedName("birthday")
     val birthday: String,
     @SerializedName("deathday")
-    val deathday: Any?,
+    val deathday: String?,
     @SerializedName("gender")
     val gender: Int,
     @SerializedName("homepage")
-    val homepage: Any?,
+    val homepage: String?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("imdb_id")
@@ -27,9 +27,9 @@ data class RemoteActor(
     @SerializedName("name")
     val name: String,
     @SerializedName("place_of_birth")
-    val placeOfBirth: Any,
+    val placeOfBirth: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")
-    val profilePath: Any?
+    val profilePath: String?
 )
