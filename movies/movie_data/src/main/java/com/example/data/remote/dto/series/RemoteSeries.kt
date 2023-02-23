@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteSeries(
     @SerializedName("backdrop_path")
-    val backdropPath: String?,
+    val backdropPath: Any?,
     @SerializedName("created_by")
-    val createdBy: List<String>,
+    val createdBy: List<Any>,
     @SerializedName("episode_run_time")
     val episodeRunTime: List<Int>,
     @SerializedName("first_air_date")
-    val firstAirDate: String,
+    val firstAirDate: Any,
     @SerializedName("genres")
     val genres: List<RemoteGenreSeries>,
     @SerializedName("homepage")
@@ -23,15 +23,15 @@ data class RemoteSeries(
     @SerializedName("languages")
     val languages: List<String>,
     @SerializedName("last_air_date")
-    val lastAirDate: String,
+    val lastAirDate: Any,
     @SerializedName("last_episode_to_air")
-    val lastEpisodeToAir: String,
+    val lastEpisodeToAir: Any,
     @SerializedName("name")
     val name: String,
     @SerializedName("networks")
-    val networks: List<String>,
+    val networks: List<Any>,
     @SerializedName("next_episode_to_air")
-    val nextEpisodeToAir: String,
+    val nextEpisodeToAir: Any,
     @SerializedName("number_of_episodes")
     val numberOfEpisodes: Int,
     @SerializedName("number_of_seasons")
@@ -47,13 +47,13 @@ data class RemoteSeries(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String?,
+    val posterPath: Any?,
     @SerializedName("production_companies")
-    val productionCompanies: List<String>,
+    val productionCompanies: List<Any>,
     @SerializedName("production_countries")
-    val productionCountries: List<String>,
+    val productionCountries: List<Any>,
     @SerializedName("seasons")
-    val seasons: List<String>,
+    val seasons: List<Any>,
     @SerializedName("status")
     val status: String,
     @SerializedName("tagline")

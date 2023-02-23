@@ -22,15 +22,17 @@ fun DetailsSeriesScreen(
     }
     val state = detailsViewModel.stateSeries
 
-    if (state.series!=null)
-    DetailsSeriesView(
-        loading = state.loading,
-        error = state.error,
-        series = state.series,
-        trailerUrl = state.trailerUrl?:"",
-        onBackClick = {
-            navHostController.popBackStack()
-        }
-    )
+    if (state.series!=null){
+        DetailsSeriesView(
+            loading = state.loading,
+            error = state.error,
+            series = state.series,
+            trailerUrl = state.trailerUrl?:"",
+            onBackClick = {
+                navHostController.popBackStack()
+            }
+        )
+    }
+
 
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
-import com.example.domin.usecases.MoviesUseCases
+import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.presentation.details.actors_details.DetailsActorState
 import com.example.presentation.details.movie_detals.DetailsMovieState
 import com.example.presentation.details.series_details.DetailsSeriesState
@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val movieUseCase: MoviesUseCases
+    private val movieUseCase: RemoteMoviesUseCases,
+
 ) : ViewModel() {
 
     var stateMovie by mutableStateOf(DetailsMovieState())
@@ -61,7 +62,11 @@ class DetailsViewModel @Inject constructor(
                             success = true,
                             loading = false,
                             error = null,
-                            trailerUrl = it.data?.get(0)?.key
+                            trailerUrl = if(it.data?.isNotEmpty()!!) {
+                                it.data?.get(0)?.key
+                            }else{
+                                ""
+                            }
                         )
                     }
                     is ResultState.IsError -> {

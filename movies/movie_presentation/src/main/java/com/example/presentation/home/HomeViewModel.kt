@@ -7,16 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.domin.models.CinemaQueries
-import com.example.domin.usecases.MoviesUseCases
+import com.example.domin.usecases.RemoteMoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val moviesUseCases: MoviesUseCases
+    private val remoteMoviesUseCases: RemoteMoviesUseCases
 ):ViewModel(){
     var state by mutableStateOf(HomeState())
 
@@ -47,7 +45,7 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun getPopularMovies() = viewModelScope
         .launch{
-        moviesUseCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
+        remoteMoviesUseCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(
@@ -75,7 +73,7 @@ class HomeViewModel @Inject constructor(
         }
     }
     private suspend fun getPopularSeries() = viewModelScope.launch {
-        moviesUseCases.getPopularSeriesUseCase(CinemaQueries.applyPopularSeries()).collect{
+        remoteMoviesUseCases.getPopularSeriesUseCase(CinemaQueries.applyPopularSeries()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(
@@ -103,7 +101,7 @@ class HomeViewModel @Inject constructor(
         }
     }
     private suspend fun getPopularActors() = viewModelScope.launch {
-        moviesUseCases.getPopularActorUseCase(CinemaQueries.applyPopularActors()).collect{
+        remoteMoviesUseCases.getPopularActorUseCase(CinemaQueries.applyPopularActors()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(

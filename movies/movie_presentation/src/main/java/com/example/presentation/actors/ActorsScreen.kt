@@ -14,7 +14,7 @@ fun ActorsScreen(
     val state = viewModel.state
     ActorScreenView(
         onActorItemClick = {
-            navHostController.navigate(Screens.MovieDetails.navToMovieDetailsWithId(it))
+            navHostController.navigate(Screens.ActorDetails.navToActorDetailsWithId(it))
         },
         actors = state.actors
     )

@@ -1,19 +1,18 @@
-package com.example.domin.usecases
+package com.example.domin.usecases.remote
 
 import com.example.core.domain.models.ResultState
 import com.example.domin.repo.MoviesRepositry
 import kotlinx.coroutines.flow.flow
 
-class GetMovieUseCase(
+class GetPopularSeriesUseCase(
     private  val moviesRepositry: MoviesRepositry
 ) {
 
     suspend operator fun invoke(
-        query:HashMap<String,String>,
-        id:Int
+        query:HashMap<String,String>
     ) = flow {
         emit(ResultState.IsLoading)
-        val result=moviesRepositry.getMovie(id,query)
+        val result=moviesRepositry.getPopularSeries(query)
         emit(result)
     }
 

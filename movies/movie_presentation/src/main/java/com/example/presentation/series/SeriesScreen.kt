@@ -14,7 +14,7 @@ fun SeriesScreen(
     val state = homeViewModel.state
     SeriesScreenView(
         onSeriesItemClick = {
-            navHostController.navigate(Screens.MovieDetails.navToMovieDetailsWithId(it))
+            navHostController.navigate(Screens.SeriesDetails.navToSeriesDetailsWithId(it))
         },
         series = state.series
     )

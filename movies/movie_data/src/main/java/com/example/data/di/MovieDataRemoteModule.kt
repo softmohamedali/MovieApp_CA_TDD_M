@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import com.example.data.local.MovieDao
 import com.example.data.remote.RemoteMovieApi
 import com.example.data.remote.RemoteConstants
 import com.example.data.repo.MoviesRepositryImp
@@ -50,7 +51,10 @@ object MovieDataRemoteModule {
 
     @Singleton
     @Provides
-    fun provideMoviesRepositry(remoteMovieApi: RemoteMovieApi): MoviesRepositry {
-        return MoviesRepositryImp(remoteMovieApi)
+    fun provideMoviesRepositry(
+        remoteMovieApi: RemoteMovieApi,
+        movieDao:MovieDao
+    ): MoviesRepositry {
+        return MoviesRepositryImp(remoteMovieApi,movieDao)
     }
 }

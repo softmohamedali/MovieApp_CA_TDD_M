@@ -11,18 +11,18 @@ import kotlinx.coroutines.flow.Flow
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavMovie(movie:MovieLocal)
+    suspend fun insertFavMovie(movie:MovieLocal)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavSeries(movie:SeriesLocal)
+    suspend fun insertFavSeries(series:SeriesLocal)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavActor(movie:ActorLocal)
+    suspend fun insertFavActor(actor:ActorLocal)
 
     @Delete
-    fun deleteFavMovie(movie:MovieLocal)
+    suspend fun deleteFavMovie(movie:MovieLocal)
     @Delete
-    fun deleteFavSeries(movie:SeriesLocal)
+    suspend fun deleteFavSeries(series:SeriesLocal)
     @Delete
-    fun deleteFavActor(movie:ActorLocal)
+    suspend fun deleteFavActor(actor:ActorLocal)
 
     @Query("SELECT * FROM movie")
     fun getFavMovies():Flow<List<MovieLocal>>
