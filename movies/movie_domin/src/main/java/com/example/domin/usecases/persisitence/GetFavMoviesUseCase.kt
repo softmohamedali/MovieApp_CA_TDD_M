@@ -9,7 +9,6 @@ class GetFavMoviesUseCase (
 ) {
 
     suspend operator fun invoke() = flow {
-        emit(ResultState.IsLoading)
         moviesRepository.getFavMovies().collect{
             if (it.isNotEmpty()){
                 emit(ResultState.IsSucsses(it))

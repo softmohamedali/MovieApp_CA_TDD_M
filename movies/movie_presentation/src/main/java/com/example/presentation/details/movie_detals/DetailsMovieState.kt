@@ -9,5 +9,6 @@ data class DetailsMovieState(
     val movieId:Int=-1,
     val movie:Movie=Movie(),
     val trailerUrl:String?=null,
+    val isFav:Boolean=false
 ) {
 }

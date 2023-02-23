@@ -11,7 +11,6 @@ class GetFavActorUseCase (
 ) {
 
     suspend operator fun invoke() = flow {
-        emit(ResultState.IsLoading)
         moviesRepository.getFavActor().collect{
             if (it.isNotEmpty()){
                 emit(ResultState.IsSucsses(it))

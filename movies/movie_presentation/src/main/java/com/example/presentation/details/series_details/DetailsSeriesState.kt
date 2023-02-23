@@ -9,5 +9,6 @@ data class DetailsSeriesState(
     val seriesId:Int=-1,
     val series: Series?=null,
     val trailerUrl:String?=null,
+    val isFav:Boolean=false
 ) {
 }

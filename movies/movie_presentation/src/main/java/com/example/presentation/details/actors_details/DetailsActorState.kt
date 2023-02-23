@@ -10,5 +10,6 @@ data class DetailsActorState(
     val actorId:Int=-1,
     val actor: Actor?=null,
     val trailerUrl:String?=null,
+    val isFav:Boolean=false
 ) {
 }

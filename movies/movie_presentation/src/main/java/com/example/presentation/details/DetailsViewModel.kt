@@ -7,7 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.log
+import com.example.domin.models.Actor
 import com.example.domin.models.CinemaQueries
+import com.example.domin.models.Movie
+import com.example.domin.models.Series
+import com.example.domin.usecases.PersistenceMovieUseCases
 import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.presentation.details.actors_details.DetailsActorState
 import com.example.presentation.details.movie_detals.DetailsMovieState
@@ -21,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val movieUseCase: RemoteMoviesUseCases,
-
+    private val persistenceMovieUseCases: PersistenceMovieUseCases
 ) : ViewModel() {
 
     var stateMovie by mutableStateOf(DetailsMovieState())
@@ -194,6 +198,66 @@ class DetailsViewModel @Inject constructor(
                 }
             }
         }
-
     }
+
+    //-------------------------local
+    private fun insertFavMovie(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.insertFavMovieUseCase(stateMovie.movie)
+        }
+    }
+
+    private fun insertFavActor(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.insertFavActorUseCase(stateActor.actor!!)
+        }
+    }
+    private fun insertFavSeries(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.insertFavSeriesUseCase(stateSeries.series!!)
+        }
+    }
+
+
+    private fun deleteFavMovie(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.deleteFavMovieUseCase(stateMovie.movie)
+        }
+    }
+
+    private fun deleteFavActor(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.deleteFavActorUseCase(stateActor.actor!!)
+        }
+    }
+    private fun deleteFavSeries(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.deleteFavSeriesUseCase(stateSeries.series!!)
+        }
+    }
+
+
+    private fun isFavMovie(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie).collect{
+                stateMovie=stateMovie.copy(isFav = it)
+            }
+        }
+    }
+
+    private fun isFavActor(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!).collect{
+                stateActor=stateActor.copy(isFav = it)
+            }
+        }
+    }
+    private fun isFavSeries(){
+        viewModelScope.launch (Dispatchers.IO){
+            persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!).collect{
+                stateSeries=stateSeries.copy(isFav = it)
+            }
+        }
+    }
+
 }

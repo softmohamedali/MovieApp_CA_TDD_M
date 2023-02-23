@@ -11,5 +11,8 @@ data class PersistenceMovieUseCases (
     val insertFavSeriesUseCase: InsertFavSeriesUseCase,
     val getFavActorUseCase: GetFavActorUseCase,
     val getFavSeriesUseCase: GetFavSeriesUseCase,
-    val getFavMoviesUseCase: GetFavMoviesUseCase
+    val getFavMoviesUseCase: GetFavMoviesUseCase,
+    val isFavMovieUseCase:IsFavMovieUseCase,
+    val isFavSeriesUseCase:IsFavSeriesUseCase,
+    val isFavActorUseCase:IsFavActorUseCase,
 )

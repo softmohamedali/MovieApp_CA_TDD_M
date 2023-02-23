@@ -43,7 +43,10 @@ object MovieDomainModule {
             insertFavSeriesUseCase= InsertFavSeriesUseCase(moviesRepositry),
             getFavActorUseCase= GetFavActorUseCase(moviesRepositry),
             getFavSeriesUseCase= GetFavSeriesUseCase(moviesRepositry),
-            getFavMoviesUseCase= GetFavMoviesUseCase(moviesRepositry)
+            getFavMoviesUseCase= GetFavMoviesUseCase(moviesRepositry),
+            isFavMovieUseCase=IsFavMovieUseCase(moviesRepositry),
+            isFavSeriesUseCase=IsFavSeriesUseCase(moviesRepositry),
+            isFavActorUseCase=IsFavActorUseCase(moviesRepositry),
         )
     }
 }
