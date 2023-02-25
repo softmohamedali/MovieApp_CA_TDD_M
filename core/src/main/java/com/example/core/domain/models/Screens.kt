@@ -8,6 +8,8 @@ sealed class Screens(var route:String){
     object Main: Screens("main")
     object Splash: Screens("splash_screen")
 
+    object Search: Screens("search")
+
     object MovieDetails: Screens("movie_details/{id}"){
         fun navToMovieDetailsWithId(id:Int):String{
             return "movie_details/$id"

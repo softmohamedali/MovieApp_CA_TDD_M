@@ -11,7 +11,7 @@ class IsFavActorUseCase (
     suspend operator fun invoke(
         actor:Actor
     ) = flow<Boolean>{
-        moviesRepository.getFavMovies().collect{ it ->
+        moviesRepository.getFavActor().collect{ it ->
             var isFavActor=false
             it.forEach {
                 if (it.id==actor.id){

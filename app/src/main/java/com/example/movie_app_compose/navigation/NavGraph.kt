@@ -14,6 +14,7 @@ import com.example.presentation.details.series_details.DetailsSeriesScreen
 import com.example.presentation.main.MainScreen
 import com.example.presentation.login.LoginScreen
 import com.example.presentation.register.RegisterScreen
+import com.example.presentation.search.SearchScreen
 import com.example.presentation.series.SeriesScreen
 import com.example.presentation.splash.SplashScreen
 
@@ -91,6 +92,14 @@ fun SetupNavigation(
             DetailsActorScreen(
                 navHostController = navController,
                 movie_Id
+            )
+        }
+
+        composable(
+            route = Screens.Search.route,
+        ) {
+            SearchScreen(
+                navController = navController,
             )
         }
     }

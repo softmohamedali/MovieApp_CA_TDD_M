@@ -15,7 +15,7 @@ class InsertFavActorUseCase(
             if (it){
                 moviesRepository.deleteFavActor(actor)
             }else{
-                moviesRepository.deleteFavActor(actor)
+                moviesRepository.insertFavActor(actor)
             }
         }
 
