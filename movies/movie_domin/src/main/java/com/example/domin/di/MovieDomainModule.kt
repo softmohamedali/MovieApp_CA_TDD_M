@@ -27,7 +27,9 @@ object MovieDomainModule {
             getPopularActorUseCase= GetPopularActorUseCase(moviesRepositry),
             getPopularSeriesUseCase= GetPopularSeriesUseCase(moviesRepositry),
             searchMovieUseCase= SearchMovieUseCase(moviesRepositry),
-            getVideosUseCase= GetVideosUseCase(moviesRepositry)
+            getVideosUseCase= GetVideosUseCase(moviesRepositry),
+            searchSeriesUseCase= SearchSeriesUseCase(moviesRepositry),
+            searchActorUseCase= SearchActorUseCase(moviesRepositry),
         )
     }
 

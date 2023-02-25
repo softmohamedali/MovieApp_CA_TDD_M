@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
-import com.example.domin.usecases.persisitence.IsFavMovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -86,14 +85,14 @@ class SearchViewModel @Inject constructor(
 
     private  fun searchSeries(){
         viewModelScope.launch {
-            searchMovieRemote().collect{
+            searchSeriesRemote().collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
                         state = state.copy(
                             success = true,
                             loading = false,
                             error = null,
-                            searchMovie = it.data!!
+                            searchSeries = it.data!!
                         )
                     }
                     is ResultState.IsError -> {
@@ -118,14 +117,14 @@ class SearchViewModel @Inject constructor(
 
     private  fun searchActor(){
         viewModelScope.launch {
-            searchMovieRemote().collect{
+            searchActorRemote().collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
                         state = state.copy(
                             success = true,
                             loading = false,
                             error = null,
-                            searchMovie = it.data!!
+                            searchActor = it.data!!
                         )
                     }
                     is ResultState.IsError -> {
@@ -152,11 +151,11 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun searchSeriesRemote()= withContext(Dispatchers.IO){
-        movieUseCase.searchMovieUseCase(CinemaQueries.applyPopularActors())
+        movieUseCase.searchSeriesUseCase(CinemaQueries.applyPopularActors())
     }
 
     private suspend fun searchActorRemote()= withContext(Dispatchers.IO){
-        movieUseCase.searchMovieUseCase(CinemaQueries.applyPopularActors())
+        movieUseCase.searchActorUseCase(CinemaQueries.applyPopularActors())
     }
 
 }

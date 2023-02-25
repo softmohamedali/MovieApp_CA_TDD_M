@@ -126,6 +126,27 @@ class MoviesRepositryImp @Inject constructor(
             }
         }
 
+    override suspend fun getSearchSeries(query: HashMap<String, String>): ResultState<List<SeriesItem>> =
+        safeCall{
+            val response=remoteMovieApi.getSearchSeries(query)
+            if (response.isSuccessful){
+                val series=response.body()?.results?.toListSeriesItems()
+                ResultState.IsSucsses(series)
+            }else{
+                ResultState.IsError(response.message())
+            }
+        }
+
+    override suspend fun getSearchActor(query: HashMap<String, String>): ResultState<List<ActorItem>> =
+        safeCall{
+            val response=remoteMovieApi.getSearchActor(query)
+            if (response.isSuccessful){
+                val series=response.body()?.results?.toListActorItems()
+                ResultState.IsSucsses(series)
+            }else{
+                ResultState.IsError(response.message())
+            }
+        }
     //-------------------------------local
     override suspend fun insertFavMovie(movie: Movie) {
         movieDao.insertFavMovie(movie.toMovieLocal())

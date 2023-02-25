@@ -49,5 +49,11 @@ interface RemoteMovieApi {
     @GET("search/movie")
     suspend fun getSearchMovie(@QueryMap query:HashMap<String,String>):Response<MovieResult>
 
+    @GET("search/tv")
+    suspend fun getSearchSeries(@QueryMap query:HashMap<String,String>):Response<SeriesResult>
+
+    @GET("search/person")
+    suspend fun getSearchActor(@QueryMap query:HashMap<String,String>):Response<ActorResult>
+
 
 }

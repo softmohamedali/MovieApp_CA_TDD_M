@@ -34,6 +34,10 @@ interface MoviesRepositry {
 
     suspend fun getSearchMovie(query:HashMap<String,String>):ResultState<List<MovieItem>>
 
+    suspend fun getSearchSeries(query:HashMap<String,String>):ResultState<List<SeriesItem>>
+
+    suspend fun getSearchActor(query:HashMap<String,String>):ResultState<List<ActorItem>>
+
 
 
     //------------------------------local

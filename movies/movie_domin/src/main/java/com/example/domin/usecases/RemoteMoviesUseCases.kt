@@ -10,6 +10,8 @@ data class RemoteMoviesUseCases(
     val getPopularActorUseCase: GetPopularActorUseCase,
     val getPopularSeriesUseCase: GetPopularSeriesUseCase,
     val searchMovieUseCase: SearchMovieUseCase,
+    val searchSeriesUseCase: SearchSeriesUseCase,
+    val searchActorUseCase: SearchActorUseCase,
     val getVideosUseCase: GetVideosUseCase
 ) {
 }
