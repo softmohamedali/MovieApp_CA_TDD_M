@@ -11,9 +11,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.core.presentation.BackButton
-import com.example.core.ui.CimaTextStyle
-import com.example.core.ui.Main_Color
-import com.example.core.ui.White
+import com.example.core.ui.*
 import com.example.domin.models.Actor
 import com.example.domin.models.Movie
 import com.example.domin.models.Series
@@ -27,7 +25,9 @@ fun DetailsMovieView(
     error:String?,
     movie: Movie,
     trailerUrl:String,
-    onBackClick:()->Unit
+    onBackClick:()->Unit,
+    onFavClick:()->Unit,
+    isFav:Boolean=false
 ) {
     val scrollState= rememberScrollState()
     val painterBackdrop = rememberImagePainter(
@@ -60,7 +60,9 @@ fun DetailsMovieView(
             ) {
                 HeaderDetailsImages(
                     posterPath = painterPoster,
-                    backPosterPath = painterBackdrop
+                    backPosterPath = painterBackdrop,
+                    favIconColor = if (isFav) Red else Hint,
+                    onFavClick = onFavClick
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
@@ -110,7 +112,9 @@ fun DetailsSeriesView(
     error:String?,
     series: Series,
     trailerUrl:String,
-    onBackClick:()->Unit
+    onBackClick:()->Unit,
+    onFavClick:()->Unit,
+    isFav:Boolean=false
 ) {
     val scrollState= rememberScrollState()
     val painterBackdrop = rememberImagePainter(
@@ -143,7 +147,9 @@ fun DetailsSeriesView(
             ) {
                 HeaderDetailsImages(
                     posterPath = painterPoster,
-                    backPosterPath = painterBackdrop
+                    backPosterPath = painterBackdrop,
+                    favIconColor = if (isFav) Red else Hint,
+                    onFavClick = onFavClick
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
@@ -196,7 +202,9 @@ fun DetailsActorView(
     error:String?,
     actor: Actor,
     trailerUrl:String,
-    onBackClick:()->Unit
+    onBackClick:()->Unit,
+    onFavClick:()->Unit,
+    isFav:Boolean=false
 ) {
     val scrollState= rememberScrollState()
     val painterBackdrop = rememberImagePainter(
@@ -229,7 +237,9 @@ fun DetailsActorView(
             ) {
                 HeaderDetailsImages(
                     posterPath = painterPoster,
-                    backPosterPath = painterBackdrop
+                    backPosterPath = painterBackdrop,
+                    favIconColor = if (isFav) Red else Hint,
+                    onFavClick = onFavClick
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(

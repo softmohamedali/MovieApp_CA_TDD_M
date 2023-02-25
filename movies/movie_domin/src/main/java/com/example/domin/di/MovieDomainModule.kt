@@ -35,9 +35,6 @@ object MovieDomainModule {
     @Provides
     fun providePersistenceMoviesUseCase(moviesRepositry: MoviesRepositry):PersistenceMovieUseCases{
         return PersistenceMovieUseCases(
-            deleteFavMovieUseCase= DeleteFavMovieUseCase(moviesRepositry),
-            deleteFavSeriesUseCase= DeleteFavSeriesUseCase(moviesRepositry),
-            deleteFavActorUseCase= DeleteFavActorUseCase(moviesRepositry),
             insertFavActorUseCase= InsertFavActorUseCase(moviesRepositry),
             insertFavMovieUseCase= InsertFavMovieUseCase(moviesRepositry),
             insertFavSeriesUseCase= InsertFavSeriesUseCase(moviesRepositry),

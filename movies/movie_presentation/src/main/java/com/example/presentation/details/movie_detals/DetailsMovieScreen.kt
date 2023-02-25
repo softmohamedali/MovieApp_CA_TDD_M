@@ -27,7 +27,11 @@ fun MovieDetailsScreen(
         trailerUrl = state.trailerUrl?:"",
         onBackClick = {
             navHostController.popBackStack()
-        }
+        },
+        onFavClick = {
+            detailsViewModel.onEvent(DetailsEvent.InsetMovieFav)
+        },
+        isFav = state.isFav
     )
 
 }

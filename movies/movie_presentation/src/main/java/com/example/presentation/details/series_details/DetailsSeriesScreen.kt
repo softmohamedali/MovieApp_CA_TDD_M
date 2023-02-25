@@ -30,7 +30,11 @@ fun DetailsSeriesScreen(
             trailerUrl = state.trailerUrl?:"",
             onBackClick = {
                 navHostController.popBackStack()
-            }
+            },
+            onFavClick = {
+                detailsViewModel.onEvent(DetailsEvent.InsetSeriesFav)
+            },
+            isFav = state.isFav
         )
     }
 

@@ -33,30 +33,42 @@ class DetailsViewModel @Inject constructor(
     var stateActor by mutableStateOf(DetailsActorState())
 
 
-
     fun onEvent(event: DetailsEvent) {
         when (event) {
             is DetailsEvent.StartScreenSetMovieId -> {
                 stateMovie = stateMovie.copy(movieId = event.id)
                 getVideoUrl(stateMovie.movieId)
                 getMovieDetails()
+
             }
             is DetailsEvent.StartScreenSetSeriesId -> {
                 stateSeries = stateSeries.copy(seriesId = event.id)
                 getVideoUrl(stateSeries.seriesId)
                 getSeriesDetails()
+
             }
             is DetailsEvent.StartScreenSetActorId -> {
                 stateActor = stateActor.copy(actorId = event.id)
                 getActorDetails()
+
+            }
+            is DetailsEvent.InsetMovieFav -> {
+                insertFavMovie()
+            }
+            is DetailsEvent.InsetSeriesFav -> {
+                insertFavSeries()
+            }
+            is DetailsEvent.InsetActorFav -> {
+                insertFavActor()
             }
         }
     }
 
-    private suspend fun getVideo(id:Int) = withContext(Dispatchers.IO) {
+    private suspend fun getVideo(id: Int) = withContext(Dispatchers.IO) {
         movieUseCase.getVideosUseCase(CinemaQueries.applyApiKey(), id)
     }
-    private fun getVideoUrl(id:Int) {
+
+    private fun getVideoUrl(id: Int) {
         viewModelScope.launch {
             getVideo(id).collect {
                 when (it) {
@@ -66,9 +78,9 @@ class DetailsViewModel @Inject constructor(
                             success = true,
                             loading = false,
                             error = null,
-                            trailerUrl = if(it.data?.isNotEmpty()!!) {
+                            trailerUrl = if (it.data?.isNotEmpty()!!) {
                                 it.data?.get(0)?.key
-                            }else{
+                            } else {
                                 ""
                             }
                         )
@@ -92,6 +104,7 @@ class DetailsViewModel @Inject constructor(
         }
 
     }
+
     private suspend fun getMovie() = withContext(Dispatchers.IO) {
         movieUseCase.getMovieUseCase(CinemaQueries.applyApiKey(), stateMovie.movieId)
     }
@@ -107,6 +120,7 @@ class DetailsViewModel @Inject constructor(
                             error = null,
                             movie = it.data!!
                         )
+                        isFavMovie()
                     }
                     is ResultState.IsError -> {
                         stateMovie = stateMovie.copy(
@@ -143,6 +157,7 @@ class DetailsViewModel @Inject constructor(
                             error = null,
                             series = it.data!!
                         )
+                        isFavSeries()
                     }
                     is ResultState.IsError -> {
                         stateSeries = stateSeries.copy(
@@ -180,6 +195,7 @@ class DetailsViewModel @Inject constructor(
                             error = null,
                             actor = it.data!!
                         )
+                        isFavActor()
                     }
                     is ResultState.IsError -> {
                         stateActor = stateActor.copy(
@@ -201,61 +217,48 @@ class DetailsViewModel @Inject constructor(
     }
 
     //-------------------------local
-    private fun insertFavMovie(){
-        viewModelScope.launch (Dispatchers.IO){
+    private fun insertFavMovie() {
+        viewModelScope.launch(Dispatchers.IO) {
             persistenceMovieUseCases.insertFavMovieUseCase(stateMovie.movie)
         }
     }
 
-    private fun insertFavActor(){
-        viewModelScope.launch (Dispatchers.IO){
+    private fun insertFavActor() {
+        viewModelScope.launch(Dispatchers.IO) {
             persistenceMovieUseCases.insertFavActorUseCase(stateActor.actor!!)
         }
     }
-    private fun insertFavSeries(){
-        viewModelScope.launch (Dispatchers.IO){
+
+    private fun insertFavSeries() {
+        viewModelScope.launch(Dispatchers.IO) {
             persistenceMovieUseCases.insertFavSeriesUseCase(stateSeries.series!!)
         }
     }
 
 
-    private fun deleteFavMovie(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.deleteFavMovieUseCase(stateMovie.movie)
-        }
-    }
-
-    private fun deleteFavActor(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.deleteFavActorUseCase(stateActor.actor!!)
-        }
-    }
-    private fun deleteFavSeries(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.deleteFavSeriesUseCase(stateSeries.series!!)
-        }
-    }
 
 
-    private fun isFavMovie(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie).collect{
-                stateMovie=stateMovie.copy(isFav = it)
+
+    private fun isFavMovie() {
+        viewModelScope.launch(Dispatchers.IO) {
+            persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie).collect {
+                stateMovie = stateMovie.copy(isFav = it)
             }
         }
     }
 
-    private fun isFavActor(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!).collect{
-                stateActor=stateActor.copy(isFav = it)
+    private fun isFavActor() {
+        viewModelScope.launch(Dispatchers.IO) {
+            persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!).collect {
+                stateActor = stateActor.copy(isFav = it)
             }
         }
     }
-    private fun isFavSeries(){
-        viewModelScope.launch (Dispatchers.IO){
-            persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!).collect{
-                stateSeries=stateSeries.copy(isFav = it)
+
+    private fun isFavSeries() {
+        viewModelScope.launch(Dispatchers.IO) {
+            persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!).collect {
+                stateSeries = stateSeries.copy(isFav = it)
             }
         }
     }

@@ -1,17 +1,24 @@
 package com.example.domin.usecases.persisitence
 
-import com.example.core.domain.models.ResultState
-import com.example.core.domain.utils.log
 import com.example.domin.models.Actor
 import com.example.domin.repo.MoviesRepositry
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.take
 
 class InsertFavActorUseCase(
-    private  val moviesRepositry: MoviesRepositry
+    private  val moviesRepository: MoviesRepositry
 ) {
 
     suspend operator fun invoke(
         actor:Actor
-    ) =moviesRepositry.insertFavActor(actor)
+    ) {
+        IsFavActorUseCase(moviesRepository).invoke(actor).take(1).collect{
+            if (it){
+                moviesRepository.deleteFavActor(actor)
+            }else{
+                moviesRepository.deleteFavActor(actor)
+            }
+        }
+
+    }
 
 }

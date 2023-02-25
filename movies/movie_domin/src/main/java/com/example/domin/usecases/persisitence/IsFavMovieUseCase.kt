@@ -14,7 +14,7 @@ class IsFavMovieUseCase (
         moviesRepository.getFavMovies().collect{
             var isfavMovie=false
             it.forEach {
-                if (it.hashCode()==movie.hashCode()){
+                if (it.id==movie.id){
                     isfavMovie=true
                 }
             }
