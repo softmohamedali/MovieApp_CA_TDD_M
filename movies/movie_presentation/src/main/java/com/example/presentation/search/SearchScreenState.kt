@@ -6,6 +6,7 @@ data class SearchScreenState(
     val loading:Boolean=false,
     val error:String?=null,
     val success:Boolean=false,
+    val searchQuery:String="",
     val searchMovie:List<MovieItem> = listOf(),
     val searchSeries:List<SeriesItem> = listOf(),
     val searchActor:List<ActorItem> = listOf(),

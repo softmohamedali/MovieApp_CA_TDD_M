@@ -25,7 +25,8 @@ fun HomeView (
     onSwipeToResfresh:()->Unit,
     onMovieCardClick:(Int)->Unit,
     onSeriesCardClick:(Int)->Unit,
-    onActorCardClick:(Int)->Unit
+    onActorCardClick:(Int)->Unit,
+    onSearchClick:()->Unit
 
 ){
     val scrollState= rememberScrollState()
@@ -48,7 +49,11 @@ fun HomeView (
                             .fillMaxSize()
                             .padding(8.dp)
                     ) {
-                        SearchEditText(readOnly = false) {}
+                        SearchEditText(
+                            myModifier = Modifier.fillMaxWidth(),
+                            readOnly = false,
+                            onClick = onSearchClick
+                        )
                         Spacer(modifier = Modifier.height(30.dp))
                         Column(
                             modifier = Modifier

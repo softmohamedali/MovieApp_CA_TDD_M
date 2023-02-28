@@ -21,17 +21,26 @@ fun SearchEditText(
     label:String="Search A specific Movie",
     value:String="",
     readOnly:Boolean=false,
-    onClick:()->Unit
+    enable:Boolean=false,
+    onClick:()->Unit={},
+    onTextChange:(String)->Unit={},
+    myModifier: Modifier=if (readOnly) Modifier.clickable {
+        onClick()
+    } else{
+        Modifier
+    },
+
 ) {
     TextField(
-        modifier= Modifier
-            .fillMaxWidth()
+        modifier=myModifier
             .clip(RoundedCornerShape(15.dp))
             .background(Search_Back)
             .clickable { onClick() },
         value = value,
         label = { Text(text = label)},
-        onValueChange = {},
+        onValueChange = {
+            onTextChange(it)
+        },
         textStyle = TextStyle(
             color = Search_Text
         ),
@@ -39,7 +48,7 @@ fun SearchEditText(
                       Icon(imageVector = Icons.Default.Search, contentDescription ="" )
         },
         readOnly=readOnly,
-        enabled = readOnly,
+        enabled = enable,
         colors = TextFieldDefaults.textFieldColors(
             cursorColor=BG_trans_light,
             focusedIndicatorColor=BG_trans_light,

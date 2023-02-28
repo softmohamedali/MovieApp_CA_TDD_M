@@ -21,7 +21,7 @@ import com.example.presentation.component.CinemaCard
 @Composable
 fun MovieScreenView(
     onMovieItemClick: (Int) -> Unit,
-    movies:List<MovieItem>
+    movies:List<MovieItem>,
 ) {
     LazyVerticalGrid(
         modifier = Modifier

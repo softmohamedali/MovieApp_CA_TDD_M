@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,6 +50,9 @@ class SearchViewModel @Inject constructor(
                     }
                 }
             }
+            is SearchScreenEvent.OnSearchTextChange ->{
+                state = state.copy(searchQuery = event.text)
+            }
         }
     }
 
@@ -63,6 +67,7 @@ class SearchViewModel @Inject constructor(
                             error = null,
                             searchMovie = it.data!!
                         )
+                        log("searchMovie viewModel ${it.data}")
                     }
                     is ResultState.IsError -> {
                         state = state.copy(
@@ -147,15 +152,15 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun searchMovieRemote()= withContext(Dispatchers.IO){
-        movieUseCase.searchMovieUseCase(CinemaQueries.applyPopularActors())
+        movieUseCase.searchMovieUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
     private suspend fun searchSeriesRemote()= withContext(Dispatchers.IO){
-        movieUseCase.searchSeriesUseCase(CinemaQueries.applyPopularActors())
+        movieUseCase.searchSeriesUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
     private suspend fun searchActorRemote()= withContext(Dispatchers.IO){
-        movieUseCase.searchActorUseCase(CinemaQueries.applyPopularActors())
+        movieUseCase.searchActorUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
 }

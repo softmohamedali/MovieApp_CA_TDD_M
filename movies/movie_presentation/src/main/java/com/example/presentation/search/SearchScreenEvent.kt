@@ -5,4 +5,6 @@ sealed class SearchScreenEvent() {
     object OnSearchSeriesCategorySelect:SearchScreenEvent()
     object OnSearchActorCategorySelect:SearchScreenEvent()
     object OnSearchClick:SearchScreenEvent()
+
+    class OnSearchTextChange(val text:String):SearchScreenEvent()
 }

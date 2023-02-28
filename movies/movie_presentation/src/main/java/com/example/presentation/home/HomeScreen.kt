@@ -29,6 +29,9 @@ fun HomeScreen(
         },
         onActorCardClick = { id ->
             navHostController.navigate(Screens.ActorDetails.navToActorDetailsWithId(id))
+        },
+        onSearchClick = {
+            navHostController.navigate(Screens.Search.route)
         }
     )
 }

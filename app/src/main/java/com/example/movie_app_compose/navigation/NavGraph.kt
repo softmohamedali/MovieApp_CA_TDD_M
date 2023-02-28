@@ -15,7 +15,6 @@ import com.example.presentation.main.MainScreen
 import com.example.presentation.login.LoginScreen
 import com.example.presentation.register.RegisterScreen
 import com.example.presentation.search.SearchScreen
-import com.example.presentation.series.SeriesScreen
 import com.example.presentation.splash.SplashScreen
 
 
@@ -99,7 +98,7 @@ fun SetupNavigation(
             route = Screens.Search.route,
         ) {
             SearchScreen(
-                navController = navController,
+                navHostController = navController,
             )
         }
     }

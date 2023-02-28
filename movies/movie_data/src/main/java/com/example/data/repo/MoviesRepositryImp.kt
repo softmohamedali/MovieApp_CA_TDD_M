@@ -120,6 +120,7 @@ class MoviesRepositryImp @Inject constructor(
             val response=remoteMovieApi.getSearchMovie(query)
             if (response.isSuccessful){
                 val series=response.body()?.remoteOneMovies?.toListMovieItems()
+                log("getSearchMovie repositry ${response.body()}")
                 ResultState.IsSucsses(series)
             }else{
                 ResultState.IsError(response.message())
