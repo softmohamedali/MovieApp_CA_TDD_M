@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.example.core.ui.BG_trans_light
 import com.example.core.ui.White
 import com.example.domin.utils.MovieDomainConstants.BASE_IMG_URL
@@ -33,7 +35,7 @@ import com.example.domin.utils.MovieDomainConstants.BASE_IMG_URL
 fun CinemaCard(
     image:String="",
     rate:String="1.6",
-    name:String=" aminzing name your aere naeverr beem watched",
+    name:String=" amazing name your aere naeverr beem watched",
     height:Dp=190.dp,
     width:Dp=140.dp,
     showRate:Boolean=true,
@@ -41,8 +43,15 @@ fun CinemaCard(
     onCardClick:(Int)->Unit,
     modifier: Modifier=Modifier
 ){
+    val context= LocalContext.current
     val painter = rememberImagePainter(
         data =  BASE_IMG_URL+image,
+        builder = {
+            ImageRequest.Builder(context)
+                .error(com.example.core.R.drawable.ic_imgbroken)
+                .placeholder(com.example.core.R.drawable.ic_imgbroken)
+                .build()
+        }
     )
 
     Column(
@@ -50,7 +59,8 @@ fun CinemaCard(
             .width(width)
             .height(height)
             .clip(
-            RoundedCornerShape(size = 8.dp))
+                RoundedCornerShape(size = 8.dp)
+            )
             .clickable {
                 onCardClick(id)
             }
