@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.core.presentation.ErrorView
 import com.example.core.presentation.LoadingLayer
+import com.example.core.presentation.SweetView
 import com.example.domin.models.MovieItem
 import com.example.domin.models.SeriesItem
 import com.example.presentation.component.CinemaCard
@@ -19,38 +20,33 @@ fun SeriesScreenView(
     loading:Boolean,
     error:String?
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp)
-    ){
-        if (loading){
-            LoadingLayer()
-        }else if (error!=null){
-            ErrorView(errorText = "Error Accord $error")
-        } else{
-            LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                columns = GridCells.Fixed(2),
-                content = {
-                    items(series.size) {
-                        CinemaCard(
-                            modifier = Modifier.padding(5.dp),
-                            name =series[it].name,
-                            image = series[it].posterPath,
-                            rate = series[it].voteAverage.toString(),
-                            id=series[it].id,
-                            onCardClick = {id->
-                                onSeriesItemClick(id)
-                            }
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                    }
 
+    SweetView(
+        error = error,
+        loading=loading
+    ) {
+        LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxWidth(),
+            columns = GridCells.Fixed(2),
+            content = {
+                items(series.size) {
+                    CinemaCard(
+                        modifier = Modifier.padding(5.dp),
+                        name =series[it].name,
+                        image = series[it].posterPath,
+                        rate = series[it].voteAverage.toString(),
+                        id=series[it].id,
+                        onCardClick = {id->
+                            onSeriesItemClick(id)
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
                 }
-            )
-        }
+
+            }
+        )
     }
+
 
 }

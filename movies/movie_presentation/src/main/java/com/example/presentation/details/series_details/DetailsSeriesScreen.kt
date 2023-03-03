@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.core.presentation.LoadingLayer
 import com.example.presentation.details.DetailsEvent
 import com.example.presentation.details.DetailsViewModel
 import com.example.presentation.details.components.DetailsSeriesView
@@ -36,6 +37,8 @@ fun DetailsSeriesScreen(
             },
             isFav = state.isFav
         )
+    }else{
+        LoadingLayer()
     }
 
 

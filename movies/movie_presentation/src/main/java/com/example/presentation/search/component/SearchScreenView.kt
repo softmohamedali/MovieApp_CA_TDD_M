@@ -13,10 +13,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.core.presentation.BackButton
-import com.example.core.presentation.Center
-import com.example.core.presentation.ErrorView
-import com.example.core.presentation.LoadingLayer
+import com.example.core.presentation.*
 import com.example.core.ui.*
 import com.example.domin.models.ActorItem
 import com.example.domin.models.MovieItem
@@ -70,114 +67,109 @@ fun SearchScreenView(
         },
         content = { p->
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
+            SweetView (
+                error=error,
+                loading=loading
             ){
-                if (loading){
-                    LoadingLayer()
-                }else if (error!=null){
-                    ErrorView(errorText = "Error Accord $error")
-                } else{
-                    Column (
-                        modifier = Modifier.fillMaxSize()
-                    ){
-                        Row(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            SearchEditText(
-                                myModifier = Modifier.weight(8f),
-                                onTextChange = onSearchTextChange,
-                                value = searchText, enable = true
-                            )
-                            FloatingActionButton(
-                                modifier = Modifier.padding(horizontal = 8.dp),
-                                onClick = onSearchClick,
-                                content = {
-                                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search Click")
-                                }
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        SelectCategorySearch(
-                            onMovieClick = onMovieCategoryClick,
-                            onSeriesClick = onSeriesCategoryClick,
-                            onActorClick = onActorCategoryClick,
-                            categorySearch=categorySearch
+                Column (
+                    modifier = Modifier.fillMaxSize()
+                ){
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        SearchEditText(
+                            myModifier = Modifier.weight(8f),
+                            onTextChange = onSearchTextChange,
+                            value = searchText, enable = true
                         )
+                        FloatingActionButton(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            onClick = onSearchClick,
+                            content = {
+                                Icon(imageVector = Icons.Default.Search, contentDescription = "Search Click")
+                            }
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    SelectCategorySearch(
+                        onMovieClick = onMovieCategoryClick,
+                        onSeriesClick = onSeriesCategoryClick,
+                        onActorClick = onActorCategoryClick,
+                        categorySearch=categorySearch
+                    )
 
-                        if (categorySearch==CategorySearch.ACTOR){
-                            LazyVerticalGrid(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                columns = GridCells.Fixed(2),
-                                content = {
-                                    items(listActor.size) {
-                                        CinemaCard(
-                                            modifier = Modifier.padding(5.dp),
-                                            name =listActor[it].name,
-                                            image = listActor[it].profilePath,
-                                            rate = "6",
-                                            id=listActor[it].id,
-                                            onCardClick = {id->
-                                                onActorItemClick(id)
-                                            }
-                                        )
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                    }
+                    if (categorySearch==CategorySearch.ACTOR){
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            columns = GridCells.Fixed(2),
+                            content = {
+                                items(listActor.size) {
+                                    CinemaCard(
+                                        modifier = Modifier.padding(5.dp),
+                                        name =listActor[it].name,
+                                        image = listActor[it].profilePath,
+                                        rate = "6",
+                                        id=listActor[it].id,
+                                        onCardClick = {id->
+                                            onActorItemClick(id)
+                                        }
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                }
 
+                            }
+                        )
+                    }
+                    if (categorySearch==CategorySearch.MOVIE){
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            columns = GridCells.Fixed(2),
+                            content = {
+                                items(listMovie.size) {
+                                    CinemaCard(
+                                        modifier = Modifier.padding(5.dp),
+                                        name =listMovie[it].originalTitle,
+                                        image = listMovie[it].posterPath,
+                                        rate = listMovie[it].voteAverage.toString(),
+                                        id=listMovie[it].id,
+                                        onCardClick = {id->
+                                            onMovieItemClick(id)
+                                        }
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
                                 }
-                            )
-                        }
-                        if (categorySearch==CategorySearch.MOVIE){
-                            LazyVerticalGrid(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                columns = GridCells.Fixed(2),
-                                content = {
-                                    items(listMovie.size) {
-                                        CinemaCard(
-                                            modifier = Modifier.padding(5.dp),
-                                            name =listMovie[it].originalTitle,
-                                            image = listMovie[it].posterPath,
-                                            rate = listMovie[it].voteAverage.toString(),
-                                            id=listMovie[it].id,
-                                            onCardClick = {id->
-                                                onMovieItemClick(id)
-                                            }
-                                        )
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                    }
 
+                            }
+                        )
+                    }
+                    if (categorySearch==CategorySearch.SERIES){
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            columns = GridCells.Fixed(2),
+                            content = {
+                                items(listSeries.size) {
+                                    CinemaCard(
+                                        modifier = Modifier.padding(5.dp),
+                                        name =listSeries[it].name,
+                                        image = listSeries[it].posterPath,
+                                        rate = listSeries[it].voteAverage.toString(),
+                                        id=listSeries[it].id,
+                                        onCardClick = {id->
+                                            onSeriesItemClick(id)
+                                        }
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
                                 }
-                            )
-                        }
-                        if (categorySearch==CategorySearch.SERIES){
-                            LazyVerticalGrid(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                columns = GridCells.Fixed(2),
-                                content = {
-                                    items(listSeries.size) {
-                                        CinemaCard(
-                                            modifier = Modifier.padding(5.dp),
-                                            name =listSeries[it].name,
-                                            image = listSeries[it].posterPath,
-                                            rate = listSeries[it].voteAverage.toString(),
-                                            id=listSeries[it].id,
-                                            onCardClick = {id->
-                                                onSeriesItemClick(id)
-                                            }
-                                        )
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                    }
-                                }
-                            )
-                        }
+                            }
+                        )
                     }
                 }
             }
+
+
 
         }
     )
