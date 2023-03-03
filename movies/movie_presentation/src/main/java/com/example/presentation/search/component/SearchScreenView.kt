@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.core.presentation.BackButton
 import com.example.core.presentation.Center
+import com.example.core.presentation.ErrorView
 import com.example.core.presentation.LoadingLayer
 import com.example.core.ui.*
 import com.example.domin.models.ActorItem
@@ -70,14 +71,14 @@ fun SearchScreenView(
         content = { p->
 
             Box(
-                modifier =Modifier.fillMaxSize().padding(8.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
             ){
                 if (loading){
                     LoadingLayer()
                 }else if (error!=null){
-                    Center {
-                        Text(text = "Error Accord $error")
-                    }
+                    ErrorView(errorText = "Error Accord $error")
                 } else{
                     Column (
                         modifier = Modifier.fillMaxSize()

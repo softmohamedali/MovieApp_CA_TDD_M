@@ -16,6 +16,8 @@ fun ActorsScreen(
         onActorItemClick = {
             navHostController.navigate(Screens.ActorDetails.navToActorDetailsWithId(it))
         },
-        actors = state.actors
+        actors = state.actors,
+        error = state.error,
+        loading = state.loading
     )
 }

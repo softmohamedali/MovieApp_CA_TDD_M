@@ -16,6 +16,8 @@ fun SeriesScreen(
         onSeriesItemClick = {
             navHostController.navigate(Screens.SeriesDetails.navToSeriesDetailsWithId(it))
         },
-        series = state.series
+        series = state.series,
+        error=state.error,
+        loading = state.loading
     )
 }

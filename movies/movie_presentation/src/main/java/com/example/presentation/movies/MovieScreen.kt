@@ -19,6 +19,8 @@ fun MovieScreen(
         onMovieItemClick = {
             navHostController.navigate(Screens.MovieDetails.navToMovieDetailsWithId(it))
         },
-        movies = state.movies
+        movies = state.movies,
+        error = state.error,
+        loading = state.loading
     )
 }
