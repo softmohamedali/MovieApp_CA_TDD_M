@@ -23,23 +23,20 @@ fun DetailsSeriesScreen(
     }
     val state = detailsViewModel.stateSeries
 
-    if (state.series!=null){
-        DetailsSeriesView(
-            loading = state.loading,
-            error = state.error,
-            series = state.series,
-            trailerUrl = state.trailerUrl?:"",
-            onBackClick = {
-                navHostController.popBackStack()
-            },
-            onFavClick = {
-                detailsViewModel.onEvent(DetailsEvent.InsetSeriesFav)
-            },
-            isFav = state.isFav
-        )
-    }else{
-        LoadingLayer()
-    }
+    DetailsSeriesView(
+        loading = state.loading,
+        error = state.error,
+        series = state.series,
+        trailerUrl = state.trailerUrl?:"",
+        onBackClick = {
+            navHostController.popBackStack()
+        },
+        onFavClick = {
+            detailsViewModel.onEvent(DetailsEvent.InsetSeriesFav)
+        },
+        isFav = state.isFav
+    )
+
 
 
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.core.presentation.BackButton
+import com.example.core.presentation.LoadingLayer
 import com.example.core.presentation.SweetView
 import com.example.core.ui.*
 import com.example.domin.models.Actor
@@ -121,7 +122,7 @@ fun DetailsMovieView(
 fun DetailsSeriesView(
     loading:Boolean,
     error:String?,
-    series: Series,
+    series: Series?,
     trailerUrl:String,
     onBackClick:()->Unit,
     onFavClick:()->Unit,
@@ -129,10 +130,10 @@ fun DetailsSeriesView(
 ) {
     val scrollState= rememberScrollState()
     val painterBackdrop = rememberImagePainter(
-        data =  MovieDomainConstants.BASE_IMG_URL +series.backdropPath,
+        data =  MovieDomainConstants.BASE_IMG_URL +series?.backdropPath,
     )
     val painterPoster = rememberImagePainter(
-        data =  MovieDomainConstants.BASE_IMG_URL +series.posterPath,
+        data =  MovieDomainConstants.BASE_IMG_URL +series?.posterPath,
     )
 
     Scaffold(
@@ -150,58 +151,62 @@ fun DetailsSeriesView(
             )
         },
         content = { p->
-
-            SweetView (
-                error=error,
-                loading=loading
-            ){
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .padding(8.dp)
-                ) {
-                    HeaderDetailsImages(
-                        posterPath = painterPoster,
-                        backPosterPath = painterBackdrop,
-                        favIconColor = if (isFav) Red else Hint,
-                        onFavClick = onFavClick
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text(
-                        text =series.name,
-                        style = CimaTextStyle.normalTitle,
-                        color = White
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    OneDetailsProperty(name = "Media Type", value ="Series")
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Popularity", value ="${series.popularity}")
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Vote", value ="${series.voteAverage}")
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Vote Count", value ="${series.voteCount}")
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Relesed Date", value = series.lastAirDate.toString())
-                    Spacer(modifier = Modifier.height(10.dp))
-                    TypeSeriesList(name = "Type", types =series.genres)
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Language", value = series.originalLanguage)
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "OverView", value = series.overview)
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text(
-                        text ="Trailer",
-                        style = CimaTextStyle.normalTitle,
-                        color = White
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    YoutubeScreen(
-                        videoId = trailerUrl,
-                    )
-                    Spacer(modifier = Modifier.height(70.dp))
+            if (series!=null){
+                SweetView (
+                    error=error,
+                    loading=loading
+                ){
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(scrollState)
+                            .padding(8.dp)
+                    ) {
+                        HeaderDetailsImages(
+                            posterPath = painterPoster,
+                            backPosterPath = painterBackdrop,
+                            favIconColor = if (isFav) Red else Hint,
+                            onFavClick = onFavClick
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text =series.name,
+                            style = CimaTextStyle.normalTitle,
+                            color = White
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        OneDetailsProperty(name = "Media Type", value ="Series")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Popularity", value ="${series.popularity}")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Vote", value ="${series.voteAverage}")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Vote Count", value ="${series.voteCount}")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Relesed Date", value = series.lastAirDate.toString())
+                        Spacer(modifier = Modifier.height(10.dp))
+                        TypeSeriesList(name = "Type", types =series.genres)
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Language", value = series.originalLanguage)
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "OverView", value = series.overview)
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text ="Trailer",
+                            style = CimaTextStyle.normalTitle,
+                            color = White
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        YoutubeScreen(
+                            videoId = trailerUrl,
+                        )
+                        Spacer(modifier = Modifier.height(70.dp))
+                    }
                 }
+            }else{
+                LoadingLayer()
             }
+
 
         }
     )
@@ -218,7 +223,7 @@ fun DetailsSeriesView(
 fun DetailsActorView(
     loading:Boolean,
     error:String?,
-    actor: Actor,
+    actor: Actor?,
     trailerUrl:String,
     onBackClick:()->Unit,
     onFavClick:()->Unit,
@@ -226,10 +231,10 @@ fun DetailsActorView(
 ) {
     val scrollState= rememberScrollState()
     val painterBackdrop = rememberImagePainter(
-        data =  MovieDomainConstants.BASE_IMG_URL +actor.profilePath,
+        data =  MovieDomainConstants.BASE_IMG_URL +actor?.profilePath,
     )
     val painterPoster = rememberImagePainter(
-        data =  MovieDomainConstants.BASE_IMG_URL +actor.profilePath,
+        data =  MovieDomainConstants.BASE_IMG_URL +actor?.profilePath,
     )
 
     Scaffold(
@@ -247,35 +252,40 @@ fun DetailsActorView(
             )
         },
         content = { p->
-            SweetView (
-                error=error,
-                loading=loading
-            ){
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .padding(8.dp)
-                ) {
-                    HeaderDetailsImages(
-                        posterPath = painterPoster,
-                        backPosterPath = painterBackdrop,
-                        favIconColor = if (isFav) Red else Hint,
-                        onFavClick = onFavClick
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text(
-                        text =actor.name,
-                        style = CimaTextStyle.normalTitle,
-                        color = White
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    OneDetailsProperty(name = "Media Type", value ="Actor")
-                    Spacer(modifier = Modifier.height(10.dp))
-                    OneDetailsProperty(name = "Popularity", value ="${actor.popularity}")
-                    Spacer(modifier = Modifier.height(10.dp))
+            if (actor!=null){
+                SweetView (
+                    error=error,
+                    loading=loading
+                ){
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(scrollState)
+                            .padding(8.dp)
+                    ) {
+                        HeaderDetailsImages(
+                            posterPath = painterPoster,
+                            backPosterPath = painterBackdrop,
+                            favIconColor = if (isFav) Red else Hint,
+                            onFavClick = onFavClick
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text =actor.name,
+                            style = CimaTextStyle.normalTitle,
+                            color = White
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        OneDetailsProperty(name = "Media Type", value ="Actor")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OneDetailsProperty(name = "Popularity", value ="${actor.popularity}")
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                 }
+            }else{
+                LoadingLayer()
             }
+
 
         }
     )
