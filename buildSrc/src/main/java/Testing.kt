@@ -5,8 +5,9 @@ object Testing {
     private const val junitAndroidExtVersion = "1.1.3"
     const val junitAndroidExt = "androidx.test.ext:junit:$junitAndroidExtVersion"
 
-    private const val coroutinesTestVersion = "1.5.1"
+    private const val coroutinesTestVersion = "1.6.1"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"
+    const val coroutinesJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm:$coroutinesTestVersion"
 
     private const val truthVersion = "1.1.3"
     const val truth = "com.google.truth:truth:$truthVersion"
@@ -17,6 +18,11 @@ object Testing {
 
     private const val turbineVersion = "0.7.0"
     const val turbine = "app.cash.turbine:turbine:$turbineVersion"
+
+    const val mockito="org.mockito.kotlin:mockito-kotlin:3.2.0"
+
+    const val coreTesting="androidx.arch.core:core-testing:2.1.0"
+
 
     private const val mockWebServerVersion = "4.9.3"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
