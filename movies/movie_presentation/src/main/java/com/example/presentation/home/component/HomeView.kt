@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.core.presentation.ErrorView
-import com.example.core.presentation.LoadingLayer
+import com.example.core.presentation.components.LoadingLayer
 import com.example.domin.models.ActorItem
 import com.example.domin.models.MovieItem
 import com.example.domin.models.SeriesItem

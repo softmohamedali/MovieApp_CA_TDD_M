@@ -6,23 +6,30 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.presentation.home.HomeEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val useCases: RemoteMoviesUseCases
+    private val useCases: RemoteMoviesUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ):ViewModel(){
 
     var state by mutableStateOf(MovieState())
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch (mainDispatcher){
             getMovies()
 
         }
@@ -31,7 +38,7 @@ class MovieViewModel @Inject constructor(
     fun onEvent(event: HomeEvent){
         when (event){
             is HomeEvent.OnSwipeRefresh->{
-                viewModelScope.launch {
+                viewModelScope.launch(mainDispatcher) {
                     getMovies()
 
                 }
@@ -45,7 +52,7 @@ class MovieViewModel @Inject constructor(
 
 
     private suspend fun getMovies() = viewModelScope
-        .launch{
+        .launch(mainDispatcher){
             useCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
                 when (it) {
                     is ResultState.IsSucsses -> {

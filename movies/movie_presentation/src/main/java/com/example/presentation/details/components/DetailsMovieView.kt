@@ -1,8 +1,6 @@
 package com.example.presentation.details.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
@@ -13,14 +11,13 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.core.presentation.BackButton
-import com.example.core.presentation.LoadingLayer
+import com.example.core.presentation.components.LoadingLayer
 import com.example.core.presentation.SweetView
 import com.example.core.ui.*
 import com.example.domin.models.Actor
 import com.example.domin.models.Movie
 import com.example.domin.models.Series
 import com.example.domin.utils.MovieDomainConstants
-import com.example.presentation.component.CinemaCard
 import com.example.presentation.main.component.MainTopAppBar
 
 @OptIn(ExperimentalCoilApi::class)

@@ -17,7 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.core.presentation.LoadingLayer
+import com.example.core.presentation.components.LoadingLayer
 import com.example.core.ui.Main_Color
 import com.example.presentation.components.MySolidButton
 import com.example.presentation.components.MyTextField

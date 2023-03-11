@@ -6,20 +6,27 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val remoteMoviesUseCases: RemoteMoviesUseCases
+    private val remoteMoviesUseCases: RemoteMoviesUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ):ViewModel(){
     var state by mutableStateOf(HomeState())
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             getPopularMovies()
             getPopularSeries()
             getPopularActors()
@@ -29,7 +36,7 @@ class HomeViewModel @Inject constructor(
     fun onEvent(event: HomeEvent){
         when (event){
             is HomeEvent.OnSwipeRefresh->{
-                viewModelScope.launch {
+                viewModelScope.launch (mainDispatcher){
                     getPopularMovies()
                     getPopularSeries()
                     getPopularActors()
@@ -44,7 +51,7 @@ class HomeViewModel @Inject constructor(
 
 
     private suspend fun getPopularMovies() = viewModelScope
-        .launch{
+        .launch(mainDispatcher){
         remoteMoviesUseCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
@@ -72,7 +79,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    private suspend fun getPopularSeries() = viewModelScope.launch {
+    private suspend fun getPopularSeries() = viewModelScope.launch(mainDispatcher) {
         remoteMoviesUseCases.getPopularSeriesUseCase(CinemaQueries.applyPopularSeries()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
@@ -100,7 +107,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    private suspend fun getPopularActors() = viewModelScope.launch {
+    private suspend fun getPopularActors() = viewModelScope.launch (mainDispatcher){
         remoteMoviesUseCases.getPopularActorUseCase(CinemaQueries.applyPopularActors()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {

@@ -6,9 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.usecases.PersistenceMovieUseCases
 import com.example.domin.usecases.RemoteMoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -17,7 +20,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val persistenceMovieUseCases: PersistenceMovieUseCases
+    private val persistenceMovieUseCases: PersistenceMovieUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ):ViewModel() {
 
     var state by mutableStateOf(FavoriteState())
@@ -28,7 +35,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun getFavMovies(){
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             getFavMoviesPersistence().collect{
                 when(it){
                     is ResultState.IsError ->{
@@ -49,7 +56,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun getFavSeries(){
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             getFavSeriesPersistence().collect{
                 when(it){
                     is ResultState.IsError ->{
@@ -70,7 +77,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
     private fun getFavActors(){
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             getFavActorsPersistence().collect{
                 when(it){
                     is ResultState.IsError ->{
@@ -91,15 +98,15 @@ class FavoriteViewModel @Inject constructor(
     }
 
 
-    private suspend fun getFavMoviesPersistence()= withContext(Dispatchers.IO){
+    private suspend fun getFavMoviesPersistence()= withContext(ioDispatcher){
         persistenceMovieUseCases.getFavMoviesUseCase()
     }
 
-    private suspend fun getFavSeriesPersistence()= withContext(Dispatchers.IO){
+    private suspend fun getFavSeriesPersistence()= withContext(ioDispatcher){
         persistenceMovieUseCases.getFavSeriesUseCase()
     }
 
-    private suspend fun getFavActorsPersistence()= withContext(Dispatchers.IO){
+    private suspend fun getFavActorsPersistence()= withContext(ioDispatcher){
         persistenceMovieUseCases.getFavActorUseCase()
     }
 }

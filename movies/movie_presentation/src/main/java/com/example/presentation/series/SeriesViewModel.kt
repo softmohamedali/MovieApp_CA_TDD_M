@@ -6,17 +6,24 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.presentation.home.HomeEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class SeriesViewModel @Inject constructor(
-    private val useCases: RemoteMoviesUseCases
+    private val useCases: RemoteMoviesUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ):ViewModel(){
 
     var state by mutableStateOf(SeriesState())
@@ -31,7 +38,7 @@ class SeriesViewModel @Inject constructor(
     fun onEvent(event: HomeEvent){
         when (event){
             is HomeEvent.OnSwipeRefresh->{
-                viewModelScope.launch {
+                viewModelScope.launch(mainDispatcher) {
                     getSeries()
 
                 }
@@ -45,7 +52,7 @@ class SeriesViewModel @Inject constructor(
 
 
     private suspend fun getSeries() = viewModelScope
-        .launch{
+        .launch(mainDispatcher){
             useCases.getPopularSeriesUseCase(CinemaQueries.applyPopularMovie()).collect{
                 when (it) {
                     is ResultState.IsSucsses -> {

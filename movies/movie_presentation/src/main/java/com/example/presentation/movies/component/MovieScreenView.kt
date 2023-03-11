@@ -1,23 +1,12 @@
 package com.example.presentation.movies.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.core.presentation.ErrorView
-import com.example.core.presentation.LoadingLayer
 import com.example.core.presentation.SweetView
-import com.example.core.ui.BG_trans_light
-import com.example.core.ui.CimaTextStyle
-import com.example.core.ui.White
-import com.example.domin.models.Movie
 import com.example.domin.models.MovieItem
 import com.example.presentation.component.CinemaCard
 

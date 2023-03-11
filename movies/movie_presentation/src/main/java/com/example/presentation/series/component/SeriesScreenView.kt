@@ -6,10 +6,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.core.presentation.ErrorView
-import com.example.core.presentation.LoadingLayer
 import com.example.core.presentation.SweetView
-import com.example.domin.models.MovieItem
 import com.example.domin.models.SeriesItem
 import com.example.presentation.component.CinemaCard
 

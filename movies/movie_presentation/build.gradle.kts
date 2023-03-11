@@ -10,4 +10,5 @@ dependencies {
     "implementation"(ThirdLib.exoPlayer)
     "implementation"(ThirdLib.swipeToRefreshGo)
     "implementation" (ThirdLib.youtubePlayer)
+    "testImplementation"(project(Modules.core))
 }

@@ -63,6 +63,7 @@ dependencies {
     testImplementation Testing.coroutinesJvm
     testImplementation Testing.turbine
     testImplementation Testing.composeUiTest
+    debugImplementation Testing.composeUiTestDebug
     testImplementation Testing.mockk
     testImplementation Testing.mockito
     testImplementation Testing.coreTesting

@@ -29,7 +29,12 @@ object Testing {
 
     const val composeUiTest = "androidx.compose.ui:ui-test-junit4:${Compose.composeVersion}"
 
+    //dont forget used that syntax  ((debugImplementation))
+    const val composeUiTestDebug = "androidx.compose.ui:ui-test-manifest:${Compose.composeVersion}"
+
     const val hiltTesting = "com.google.dagger:hilt-android-testing:${DaggerHilt.version}"
+
+
 
 
 

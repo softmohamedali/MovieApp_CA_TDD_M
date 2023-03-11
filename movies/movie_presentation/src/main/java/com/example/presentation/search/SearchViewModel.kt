@@ -6,10 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,7 +20,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private  val movieUseCase:RemoteMoviesUseCases
+    private  val movieUseCase:RemoteMoviesUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ):ViewModel() {
 
     var state by mutableStateOf(SearchScreenState())
@@ -57,7 +64,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private  fun searchMovie(){
-        viewModelScope.launch {
+        viewModelScope.launch (mainDispatcher){
             searchMovieRemote().collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -89,7 +96,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private  fun searchSeries(){
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             searchSeriesRemote().collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -121,7 +128,7 @@ class SearchViewModel @Inject constructor(
 
 
     private  fun searchActor(){
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             searchActorRemote().collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -151,15 +158,15 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private suspend fun searchMovieRemote()= withContext(Dispatchers.IO){
+    private suspend fun searchMovieRemote()= withContext(ioDispatcher){
         movieUseCase.searchMovieUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
-    private suspend fun searchSeriesRemote()= withContext(Dispatchers.IO){
+    private suspend fun searchSeriesRemote()= withContext(ioDispatcher){
         movieUseCase.searchSeriesUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
-    private suspend fun searchActorRemote()= withContext(Dispatchers.IO){
+    private suspend fun searchActorRemote()= withContext(ioDispatcher){
         movieUseCase.searchActorUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 

@@ -6,17 +6,17 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
+import com.example.core.domain.qulifier.IODispatchers
+import com.example.core.domain.qulifier.MainDispatchers
 import com.example.core.domain.utils.log
-import com.example.domin.models.Actor
 import com.example.domin.models.CinemaQueries
-import com.example.domin.models.Movie
-import com.example.domin.models.Series
 import com.example.domin.usecases.PersistenceMovieUseCases
 import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.presentation.details.actors_details.DetailsActorState
 import com.example.presentation.details.movie_detals.DetailsMovieState
 import com.example.presentation.details.series_details.DetailsSeriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,7 +25,11 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val movieUseCase: RemoteMoviesUseCases,
-    private val persistenceMovieUseCases: PersistenceMovieUseCases
+    private val persistenceMovieUseCases: PersistenceMovieUseCases,
+    @IODispatchers
+    private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatchers
+    private val mainDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     var stateMovie by mutableStateOf(DetailsMovieState())
@@ -64,12 +68,12 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getVideo(id: Int) = withContext(Dispatchers.IO) {
+    private suspend fun getVideo(id: Int) = withContext(ioDispatcher) {
         movieUseCase.getVideosUseCase(CinemaQueries.applyApiKey(), id)
     }
 
     private fun getVideoUrl(id: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch (mainDispatcher){
             getVideo(id).collect {
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -105,12 +109,12 @@ class DetailsViewModel @Inject constructor(
 
     }
 
-    private suspend fun getMovie() = withContext(Dispatchers.IO) {
+    private suspend fun getMovie() = withContext(ioDispatcher) {
         movieUseCase.getMovieUseCase(CinemaQueries.applyApiKey(), stateMovie.movieId)
     }
 
     private fun getMovieDetails() {
-        viewModelScope.launch {
+        viewModelScope.launch (mainDispatcher){
             getMovie().collect {
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -142,12 +146,12 @@ class DetailsViewModel @Inject constructor(
 
     }
 
-    private suspend fun getSeries() = withContext(Dispatchers.IO) {
+    private suspend fun getSeries() = withContext(ioDispatcher) {
         movieUseCase.getSeriesUseCase(CinemaQueries.applyApiKey(), stateSeries.seriesId)
     }
 
     private fun getSeriesDetails() {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             getSeries().collect {
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -180,12 +184,12 @@ class DetailsViewModel @Inject constructor(
     }
 
 
-    private suspend fun getActor() = withContext(Dispatchers.IO) {
+    private suspend fun getActor() = withContext(ioDispatcher) {
         movieUseCase.getActorUseCase(CinemaQueries.applyApiKey(), stateActor.actorId)
     }
 
     private fun getActorDetails() {
-        viewModelScope.launch {
+        viewModelScope.launch (mainDispatcher){
             getActor().collect {
                 when (it) {
                     is ResultState.IsSucsses -> {
@@ -218,19 +222,19 @@ class DetailsViewModel @Inject constructor(
 
     //-------------------------local
     private fun insertFavMovie() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             persistenceMovieUseCases.insertFavMovieUseCase(stateMovie.movie)
         }
     }
 
     private fun insertFavActor() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             persistenceMovieUseCases.insertFavActorUseCase(stateActor.actor!!)
         }
     }
 
     private fun insertFavSeries() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             persistenceMovieUseCases.insertFavSeriesUseCase(stateSeries.series!!)
         }
     }
@@ -240,27 +244,39 @@ class DetailsViewModel @Inject constructor(
 
 
     private fun isFavMovie() {
-        viewModelScope.launch(Dispatchers.IO) {
-            persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie).collect {
+        viewModelScope.launch(mainDispatcher) {
+            isFavMovieLocal().collect {
                 stateMovie = stateMovie.copy(isFav = it)
             }
         }
     }
 
+    private suspend fun isFavMovieLocal()= withContext(ioDispatcher){
+        persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie)
+    }
+
     private fun isFavActor() {
-        viewModelScope.launch(Dispatchers.IO) {
-            persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!).collect {
+        viewModelScope.launch(mainDispatcher) {
+            isFavActorLocal().collect {
                 stateActor = stateActor.copy(isFav = it)
             }
         }
     }
 
+    private suspend fun isFavActorLocal()= withContext(ioDispatcher){
+        persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!)
+    }
+
     private fun isFavSeries() {
-        viewModelScope.launch(Dispatchers.IO) {
-            persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!).collect {
+        viewModelScope.launch(mainDispatcher) {
+            isFavSeriesLocal().collect {
                 stateSeries = stateSeries.copy(isFav = it)
             }
         }
+    }
+
+    private suspend fun isFavSeriesLocal()= withContext(ioDispatcher){
+        persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!)
     }
 
 }
