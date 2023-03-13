@@ -2,9 +2,11 @@ package com.example.domin.usecases.persisitence
 
 import com.example.core.domain.models.ResultState
 import com.example.domin.repo.MoviesRepositry
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.flow
-
-class GetFavMoviesUseCase (
+import javax.inject.Inject
+@ViewModelScoped
+class GetFavMoviesUseCase @Inject constructor(
     private  val moviesRepository: MoviesRepositry
 ) {
 

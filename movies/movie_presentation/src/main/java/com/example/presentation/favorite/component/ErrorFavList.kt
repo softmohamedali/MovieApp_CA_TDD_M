@@ -1,6 +1,11 @@
 package com.example.presentation.favorite.component
 
+import androidx.compose.runtime.Composable
 
 
-class ErrorFavList {
+@Composable
+fun ErrorFavList(
+    text:String?=""
+){
+
 }

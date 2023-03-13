@@ -2,9 +2,11 @@ package com.example.domin.usecases.persisitence
 
 import com.example.domin.models.Movie
 import com.example.domin.repo.MoviesRepositry
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.take
-
-class InsertFavMovieUseCase (
+import javax.inject.Inject
+@ViewModelScoped
+class InsertFavMovieUseCase @Inject constructor(
     private  val moviesRepository: MoviesRepositry
 ) {
 

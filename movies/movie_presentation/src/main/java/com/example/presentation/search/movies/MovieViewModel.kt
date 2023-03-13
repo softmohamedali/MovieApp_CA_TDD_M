@@ -1,4 +1,4 @@
-package com.example.presentation.movies
+package com.example.presentation.search.movies
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +10,7 @@ import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.remote.GetPopularMovieUseCase
 import com.example.presentation.home.HomeEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val useCases: RemoteMoviesUseCases,
+    private val getPopularMovieUseCase: GetPopularMovieUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -53,7 +54,7 @@ class MovieViewModel @Inject constructor(
 
     private suspend fun getMovies() = viewModelScope
         .launch(mainDispatcher){
-            useCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
+            getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
                         state = state.copy(

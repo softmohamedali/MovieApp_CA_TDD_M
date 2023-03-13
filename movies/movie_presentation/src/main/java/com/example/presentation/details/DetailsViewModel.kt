@@ -12,6 +12,11 @@ import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.PersistenceMovieUseCases
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.persisitence.*
+import com.example.domin.usecases.remote.GetActorUseCase
+import com.example.domin.usecases.remote.GetMovieUseCase
+import com.example.domin.usecases.remote.GetSeriesUseCase
+import com.example.domin.usecases.remote.GetVideosUseCase
 import com.example.presentation.details.actors_details.DetailsActorState
 import com.example.presentation.details.movie_detals.DetailsMovieState
 import com.example.presentation.details.series_details.DetailsSeriesState
@@ -24,8 +29,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val movieUseCase: RemoteMoviesUseCases,
-    private val persistenceMovieUseCases: PersistenceMovieUseCases,
+    private val getVideosUseCase: GetVideosUseCase,
+    private val getSeriesUseCase: GetSeriesUseCase,
+    private val getMovieUseCase: GetMovieUseCase,
+    private val getActorUseCase: GetActorUseCase,
+    private val insertFavMovieUseCase: InsertFavMovieUseCase,
+    private val insertFavSeriesUseCase: InsertFavSeriesUseCase,
+    private val insertFavActorUseCase: InsertFavActorUseCase,
+    private val isFavSeriesUseCase: IsFavSeriesUseCase,
+    private val isFavMovieUseCase: IsFavMovieUseCase,
+    private val isFavActorUseCase: IsFavActorUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -69,7 +82,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun getVideo(id: Int) = withContext(ioDispatcher) {
-        movieUseCase.getVideosUseCase(CinemaQueries.applyApiKey(), id)
+        getVideosUseCase(CinemaQueries.applyApiKey(), id)
     }
 
     private fun getVideoUrl(id: Int) {
@@ -110,7 +123,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun getMovie() = withContext(ioDispatcher) {
-        movieUseCase.getMovieUseCase(CinemaQueries.applyApiKey(), stateMovie.movieId)
+        getMovieUseCase(CinemaQueries.applyApiKey(), stateMovie.movieId)
     }
 
     private fun getMovieDetails() {
@@ -147,7 +160,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun getSeries() = withContext(ioDispatcher) {
-        movieUseCase.getSeriesUseCase(CinemaQueries.applyApiKey(), stateSeries.seriesId)
+        getSeriesUseCase(CinemaQueries.applyApiKey(), stateSeries.seriesId)
     }
 
     private fun getSeriesDetails() {
@@ -185,7 +198,7 @@ class DetailsViewModel @Inject constructor(
 
 
     private suspend fun getActor() = withContext(ioDispatcher) {
-        movieUseCase.getActorUseCase(CinemaQueries.applyApiKey(), stateActor.actorId)
+        getActorUseCase(CinemaQueries.applyApiKey(), stateActor.actorId)
     }
 
     private fun getActorDetails() {
@@ -223,19 +236,19 @@ class DetailsViewModel @Inject constructor(
     //-------------------------local
     private fun insertFavMovie() {
         viewModelScope.launch(ioDispatcher) {
-            persistenceMovieUseCases.insertFavMovieUseCase(stateMovie.movie)
+            insertFavMovieUseCase(stateMovie.movie)
         }
     }
 
     private fun insertFavActor() {
         viewModelScope.launch(ioDispatcher) {
-            persistenceMovieUseCases.insertFavActorUseCase(stateActor.actor!!)
+            insertFavActorUseCase(stateActor.actor!!)
         }
     }
 
     private fun insertFavSeries() {
         viewModelScope.launch(ioDispatcher) {
-            persistenceMovieUseCases.insertFavSeriesUseCase(stateSeries.series!!)
+            insertFavSeriesUseCase(stateSeries.series!!)
         }
     }
 
@@ -252,7 +265,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun isFavMovieLocal()= withContext(ioDispatcher){
-        persistenceMovieUseCases.isFavMovieUseCase(stateMovie.movie)
+        isFavMovieUseCase(stateMovie.movie)
     }
 
     private fun isFavActor() {
@@ -264,7 +277,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun isFavActorLocal()= withContext(ioDispatcher){
-        persistenceMovieUseCases.isFavActorUseCase(stateActor.actor!!)
+        isFavActorUseCase(stateActor.actor!!)
     }
 
     private fun isFavSeries() {
@@ -276,7 +289,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun isFavSeriesLocal()= withContext(ioDispatcher){
-        persistenceMovieUseCases.isFavSeriesUseCase(stateSeries.series!!)
+        isFavSeriesUseCase(stateSeries.series!!)
     }
 
 }

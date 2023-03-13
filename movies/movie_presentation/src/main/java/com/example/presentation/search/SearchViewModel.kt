@@ -11,6 +11,9 @@ import com.example.core.domain.qulifier.MainDispatchers
 import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.remote.SearchActorUseCase
+import com.example.domin.usecases.remote.SearchMovieUseCase
+import com.example.domin.usecases.remote.SearchSeriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private  val movieUseCase:RemoteMoviesUseCases,
+    private  val searchMoviesUseCases: SearchMovieUseCase,
+    private  val searchSeriesUseCase: SearchSeriesUseCase,
+    private  val searchActorUseCase: SearchActorUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -159,15 +164,15 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun searchMovieRemote()= withContext(ioDispatcher){
-        movieUseCase.searchMovieUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
+        searchMoviesUseCases(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
     private suspend fun searchSeriesRemote()= withContext(ioDispatcher){
-        movieUseCase.searchSeriesUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
+        searchSeriesUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
     private suspend fun searchActorRemote()= withContext(ioDispatcher){
-        movieUseCase.searchActorUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
+        searchActorUseCase(CinemaQueries.applySearchQueri(state.searchQuery,"1"))
     }
 
 }

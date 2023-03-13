@@ -4,12 +4,14 @@ import com.example.core.domain.models.ResultState
 import com.example.core.domain.utils.log
 import com.example.domin.models.Series
 import com.example.domin.repo.MoviesRepositry
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.take
-
-class InsertFavSeriesUseCase (
+import javax.inject.Inject
+@ViewModelScoped
+class InsertFavSeriesUseCase @Inject constructor(
     private  val moviesRepository: MoviesRepositry
 ) {
 

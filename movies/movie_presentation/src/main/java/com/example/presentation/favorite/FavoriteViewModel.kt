@@ -10,6 +10,9 @@ import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.usecases.PersistenceMovieUseCases
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.persisitence.GetFavActorUseCase
+import com.example.domin.usecases.persisitence.GetFavMoviesUseCase
+import com.example.domin.usecases.persisitence.GetFavSeriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val persistenceMovieUseCases: PersistenceMovieUseCases,
+    private val getFavMoviesUseCase: GetFavMoviesUseCase,
+    private val getFavActorUseCase: GetFavActorUseCase,
+    private val getFavSeriesUseCase: GetFavSeriesUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -99,14 +104,14 @@ class FavoriteViewModel @Inject constructor(
 
 
     private suspend fun getFavMoviesPersistence()= withContext(ioDispatcher){
-        persistenceMovieUseCases.getFavMoviesUseCase()
+        getFavMoviesUseCase()
     }
 
     private suspend fun getFavSeriesPersistence()= withContext(ioDispatcher){
-        persistenceMovieUseCases.getFavSeriesUseCase()
+        getFavSeriesUseCase()
     }
 
     private suspend fun getFavActorsPersistence()= withContext(ioDispatcher){
-        persistenceMovieUseCases.getFavActorUseCase()
+        getFavActorUseCase()
     }
 }

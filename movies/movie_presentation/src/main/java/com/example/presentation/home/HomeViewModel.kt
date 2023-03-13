@@ -10,6 +10,9 @@ import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.remote.GetPopularActorUseCase
+import com.example.domin.usecases.remote.GetPopularMovieUseCase
+import com.example.domin.usecases.remote.GetPopularSeriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -17,7 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val remoteMoviesUseCases: RemoteMoviesUseCases,
+    private val getPopularMovieUseCase: GetPopularMovieUseCase,
+    private val getPopularActorUseCase: GetPopularActorUseCase,
+    private val getPopularSeriesUseCase: GetPopularSeriesUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -52,7 +57,7 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun getPopularMovies() = viewModelScope
         .launch(mainDispatcher){
-        remoteMoviesUseCases.getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
+        getPopularMovieUseCase(CinemaQueries.applyPopularMovie()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(
@@ -80,7 +85,7 @@ class HomeViewModel @Inject constructor(
         }
     }
     private suspend fun getPopularSeries() = viewModelScope.launch(mainDispatcher) {
-        remoteMoviesUseCases.getPopularSeriesUseCase(CinemaQueries.applyPopularSeries()).collect{
+        getPopularSeriesUseCase(CinemaQueries.applyPopularSeries()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(
@@ -108,7 +113,7 @@ class HomeViewModel @Inject constructor(
         }
     }
     private suspend fun getPopularActors() = viewModelScope.launch (mainDispatcher){
-        remoteMoviesUseCases.getPopularActorUseCase(CinemaQueries.applyPopularActors()).collect{
+        getPopularActorUseCase(CinemaQueries.applyPopularActors()).collect{
             when (it) {
                 is ResultState.IsSucsses -> {
                     state = state.copy(

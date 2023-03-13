@@ -1,4 +1,4 @@
-package com.example.presentation.movies
+package com.example.presentation.search.movies
 
 import com.example.domin.models.ActorItem
 import com.example.domin.models.MovieItem

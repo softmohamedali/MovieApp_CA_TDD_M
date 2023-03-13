@@ -1,4 +1,4 @@
-package com.example.presentation.movies.component
+package com.example.presentation.search.movies.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells

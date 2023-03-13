@@ -16,38 +16,7 @@ object MovieDomainModule {
 
 
 
-    @ViewModelScoped
-    @Provides
-    fun provideMoviesUseCase(moviesRepositry: MoviesRepositry):RemoteMoviesUseCases{
-        return RemoteMoviesUseCases(
-            getActorUseCase= GetActorUseCase(moviesRepositry),
-            getMovieUseCase= GetMovieUseCase(moviesRepositry),
-            getSeriesUseCase= GetSeriesUseCase(moviesRepositry),
-            getPopularMovieUseCase= GetPopularMovieUseCase(moviesRepositry),
-            getPopularActorUseCase= GetPopularActorUseCase(moviesRepositry),
-            getPopularSeriesUseCase= GetPopularSeriesUseCase(moviesRepositry),
-            searchMovieUseCase= SearchMovieUseCase(moviesRepositry),
-            getVideosUseCase= GetVideosUseCase(moviesRepositry),
-            searchSeriesUseCase= SearchSeriesUseCase(moviesRepositry),
-            searchActorUseCase= SearchActorUseCase(moviesRepositry),
-        )
-    }
 
-    @ViewModelScoped
-    @Provides
-    fun providePersistenceMoviesUseCase(moviesRepositry: MoviesRepositry):PersistenceMovieUseCases{
-        return PersistenceMovieUseCases(
-            insertFavActorUseCase= InsertFavActorUseCase(moviesRepositry),
-            insertFavMovieUseCase= InsertFavMovieUseCase(moviesRepositry),
-            insertFavSeriesUseCase= InsertFavSeriesUseCase(moviesRepositry),
-            getFavActorUseCase= GetFavActorUseCase(moviesRepositry),
-            getFavSeriesUseCase= GetFavSeriesUseCase(moviesRepositry),
-            getFavMoviesUseCase= GetFavMoviesUseCase(moviesRepositry),
-            isFavMovieUseCase=IsFavMovieUseCase(moviesRepositry),
-            isFavSeriesUseCase=IsFavSeriesUseCase(moviesRepositry),
-            isFavActorUseCase=IsFavActorUseCase(moviesRepositry),
-        )
-    }
 }
 
 

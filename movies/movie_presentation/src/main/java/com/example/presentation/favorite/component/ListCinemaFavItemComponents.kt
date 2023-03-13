@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.core.presentation.ErrorView
 import com.example.core.ui.Typography
 import com.example.core.ui.White
 import com.example.domin.models.Actor
@@ -20,7 +21,8 @@ fun ListCinemaFavSeriesComponent (
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
     listItems:List<Series> = listOf(),
-    onCardClick:(Int)->Unit
+    onCardClick:(Int)->Unit,
+    error: String?
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -29,26 +31,35 @@ fun ListCinemaFavSeriesComponent (
             color = White
         )
         Text(
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier
+                .padding(vertical = 8.dp)
                 .clickable { onMainActionClick() },
             text = mainActionText,
             style = Typography.caption,
             color = White
         )
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(listItems.size){
-                CinemaCard(
-                    name =listItems[it].name?:"",
-                    image = listItems[it].posterPath.toString(),
-                    rate = listItems[it].voteAverage.toString(),
-                    id=listItems[it].id,
-                    onCardClick = { id->
-                        onCardClick(id)
-                    }
-                )
-                Spacer(modifier = Modifier.width(8.dp))
+        if (error==null){
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(listItems.size){
+                    CinemaCard(
+                        name =listItems[it].name?:"",
+                        image = listItems[it].posterPath.toString(),
+                        rate = listItems[it].voteAverage.toString(),
+                        id=listItems[it].id,
+                        onCardClick = { id->
+                            onCardClick(id)
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
             }
+        }else{
+            ErrorView(
+                errorText =error ,
+                modifier = Modifier.height(200.dp)
+            )
         }
+
     }
 }
 
@@ -59,7 +70,8 @@ fun ListCinemaFavActorsComponent (
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
     listItems:List<Actor> = listOf(),
-    onCardClick:(Int)->Unit
+    onCardClick:(Int)->Unit,
+    error: String?
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -68,26 +80,35 @@ fun ListCinemaFavActorsComponent (
             color = White
         )
         Text(
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier
+                .padding(vertical = 8.dp)
                 .clickable { onMainActionClick() },
             text = mainActionText,
             style = Typography.caption,
             color = White
         )
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(listItems.size){
-                CinemaCard(
-                    name =listItems[it].name,
-                    image = listItems[it].profilePath,
-                    showRate = false,
-                    id=listItems[it].id,
-                    onCardClick = {id->
-                        onCardClick(id)
-                    }
-                )
-                Spacer(modifier = Modifier.width(8.dp))
+        if (error==null){
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(listItems.size){
+                    CinemaCard(
+                        name =listItems[it].name,
+                        image = listItems[it].profilePath,
+                        showRate = false,
+                        id=listItems[it].id,
+                        onCardClick = {id->
+                            onCardClick(id)
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
             }
+        }else{
+            ErrorView(
+                errorText =error ,
+                modifier = Modifier.height(200.dp)
+            )
         }
+
     }
 }
 
@@ -99,7 +120,8 @@ fun ListCinemaFavMovieComponent (
     mainActionText:String="<< See All",
     onMainActionClick:()->Unit={},
     listItems:List<Movie> = listOf(),
-    onCardClick:(Int)->Unit
+    onCardClick:(Int)->Unit,
+    error:String?=null
 ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
@@ -108,26 +130,35 @@ fun ListCinemaFavMovieComponent (
             color = White
         )
         Text(
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier
+                .padding(vertical = 8.dp)
                 .clickable { onMainActionClick() },
             text = mainActionText,
             style = Typography.caption,
             color = White
         )
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(listItems.size){ it ->
-                CinemaCard(
-                    name =listItems[it].originalTitle,
-                    image = listItems[it].posterPath,
-                    rate = listItems[it].voteAverage.toString(),
-                    id=listItems[it].id,
-                    onCardClick = {id->
-                        onCardClick(id)
-                    }
-                )
-                Spacer(modifier = Modifier.width(8.dp))
+        if (error==null){
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(listItems.size){ it ->
+                    CinemaCard(
+                        name =listItems[it].originalTitle,
+                        image = listItems[it].posterPath,
+                        rate = listItems[it].voteAverage.toString(),
+                        id=listItems[it].id,
+                        onCardClick = {id->
+                            onCardClick(id)
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
             }
+        }else{
+            ErrorView(
+                errorText =error ,
+                modifier = Modifier.height(200.dp)
+            )
         }
+
     }
 }
 

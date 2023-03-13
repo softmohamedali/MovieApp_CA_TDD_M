@@ -11,7 +11,7 @@ import com.example.presentation.actors.ActorsScreen
 import com.example.presentation.favorite.FavoritesScreen
 import com.example.presentation.home.HomeScreen
 import com.example.presentation.main.MainViewModel
-import com.example.presentation.movies.MovieScreen
+import com.example.presentation.search.movies.MovieScreen
 import com.example.presentation.series.SeriesScreen
 
 @Composable

@@ -50,21 +50,24 @@ fun FavoriteView(
                 listItems = favMovies,
                 onCardClick = {id->
                     onFavMovieClick(id)
-                }
+                },
+                error = if (favMovies.isEmpty()) {"No Favorite Movie Found"} else null
             )
             Spacer(modifier = Modifier.height(10.dp))
             ListCinemaFavSeriesComponent(
                 listItems = favSeries,
                 onCardClick = {id->
                     onFavSeriesClick(id)
-                }
+                },
+                error = if (favSeries.isEmpty()) {"No Favorite Series Found"} else null
             )
             Spacer(modifier = Modifier.height(10.dp))
             ListCinemaFavActorsComponent(
                 listItems = favActor,
                 onCardClick = {id->
                     onFavActorClick(id)
-                }
+                },
+                error = if (favActor.isEmpty()) {"No Favorite Actor Found"} else null
             )
             Spacer(modifier = Modifier.height(50.dp))
         }

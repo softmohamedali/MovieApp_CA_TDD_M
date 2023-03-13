@@ -10,6 +10,7 @@ import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
 import com.example.domin.usecases.RemoteMoviesUseCases
+import com.example.domin.usecases.remote.GetPopularSeriesUseCase
 import com.example.presentation.home.HomeEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SeriesViewModel @Inject constructor(
-    private val useCases: RemoteMoviesUseCases,
+    private val getPopularSeriesUseCase: GetPopularSeriesUseCase,
     @IODispatchers
     private val ioDispatcher: CoroutineDispatcher,
     @MainDispatchers
@@ -53,7 +54,7 @@ class SeriesViewModel @Inject constructor(
 
     private suspend fun getSeries() = viewModelScope
         .launch(mainDispatcher){
-            useCases.getPopularSeriesUseCase(CinemaQueries.applyPopularMovie()).collect{
+            getPopularSeriesUseCase(CinemaQueries.applyPopularMovie()).collect{
                 when (it) {
                     is ResultState.IsSucsses -> {
                         state = state.copy(

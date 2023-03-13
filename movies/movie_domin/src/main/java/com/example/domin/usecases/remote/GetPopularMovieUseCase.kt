@@ -2,9 +2,11 @@ package com.example.domin.usecases.remote
 
 import com.example.core.domain.models.ResultState
 import com.example.domin.repo.MoviesRepositry
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.flow
-
-class GetPopularMovieUseCase (
+import javax.inject.Inject
+@ViewModelScoped
+class GetPopularMovieUseCase @Inject constructor(
     private  val moviesRepositry: MoviesRepositry
     ) {
 
