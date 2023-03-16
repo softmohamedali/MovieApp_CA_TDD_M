@@ -16,7 +16,6 @@ class SearchMovieUseCase @Inject constructor(
     ) = flow {
         emit(ResultState.IsLoading)
         val result=moviesRepositry.getSearchMovie(query)
-        log("SearchMovieUseCase $result")
         emit(result)
     }
 

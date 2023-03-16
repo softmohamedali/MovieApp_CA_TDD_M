@@ -8,15 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.models.ResultState
 import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
-import com.example.domin.usecases.PersistenceMovieUseCases
-import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.domin.usecases.persisitence.GetFavActorUseCase
 import com.example.domin.usecases.persisitence.GetFavMoviesUseCase
 import com.example.domin.usecases.persisitence.GetFavSeriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -9,12 +9,10 @@ import com.example.core.domain.models.ResultState
 import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.domin.models.CinemaQueries
-import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.domin.usecases.remote.GetPopularActorUseCase
 import com.example.presentation.home.HomeEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

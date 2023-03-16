@@ -10,8 +10,6 @@ import com.example.core.domain.qulifier.IODispatchers
 import com.example.core.domain.qulifier.MainDispatchers
 import com.example.core.domain.utils.log
 import com.example.domin.models.CinemaQueries
-import com.example.domin.usecases.PersistenceMovieUseCases
-import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.domin.usecases.persisitence.*
 import com.example.domin.usecases.remote.GetActorUseCase
 import com.example.domin.usecases.remote.GetMovieUseCase
@@ -22,7 +20,6 @@ import com.example.presentation.details.movie_detals.DetailsMovieState
 import com.example.presentation.details.series_details.DetailsSeriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

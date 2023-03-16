@@ -3,17 +3,12 @@ package com.example.presentation.actors
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.core.domain.models.ResultState
 import com.example.domin.models.Actor
-import com.example.domin.repo.MoviesRepositry
-import com.example.domin.usecases.RemoteMoviesUseCases
 import com.example.domin.usecases.remote.GetPopularActorUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.*
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 
 import org.mockito.kotlin.mock
@@ -26,7 +21,7 @@ class ActorViewModelTest {
     val taskExecutorRule = InstantTaskExecutorRule()
 
 
-    val dispatcher = StandardTestDispatcher()
+    private val dispatcher = StandardTestDispatcher()
     private lateinit var useCases: GetPopularActorUseCase
     private lateinit var actorViewModel: ActorViewModel
 
