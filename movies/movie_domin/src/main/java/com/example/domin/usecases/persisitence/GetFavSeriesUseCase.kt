@@ -13,8 +13,6 @@ class GetFavSeriesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke()= flow {
-        log("i.m in GetFavSeriesUseCase")
-
         moviesRepository.getFavSeries().collect{
             log("is fav series $it")
             if (it.isNotEmpty()){

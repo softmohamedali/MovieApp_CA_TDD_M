@@ -286,7 +286,7 @@ class DetailsViewModel @Inject constructor(
     }
 
     private suspend fun isFavSeriesLocal()= withContext(ioDispatcher){
-        isFavSeriesUseCase(stateSeries.series!!)
+        isFavSeriesUseCase(stateSeries.series!!.id)
     }
 
 }

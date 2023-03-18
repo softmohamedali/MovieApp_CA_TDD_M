@@ -12,12 +12,12 @@ class IsFavSeriesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(
-        series: Series
-    )= flow<Boolean>{
+         id:Int
+    )= flow{
         moviesRepository.getFavSeries().collect{
             var isfavSeries=false
             it.forEach {
-                if (it.id==series.id){
+                if (it.id==id){
                     isfavSeries=true
                 }
             }

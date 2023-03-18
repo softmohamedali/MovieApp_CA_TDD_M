@@ -18,9 +18,7 @@ class InsertFavSeriesUseCase @Inject constructor(
     suspend operator fun invoke(
        series: Series
     ) {
-        log("i.m in InsertFavSeriesUseCase")
-        IsFavSeriesUseCase(moviesRepository).invoke(series).take(1).collect{
-            log("is fav series $it")
+        IsFavSeriesUseCase(moviesRepository).invoke(series.id).take(1).collect{
             if (it){
                 moviesRepository.deleteFavSeries(series)
             }else{

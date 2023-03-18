@@ -21,9 +21,6 @@ class GetPopularActorUseCaseTest {
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
 
-
-
-    val dispatcher = StandardTestDispatcher()
     private lateinit var useCases: GetPopularActorUseCase
     private lateinit var repositry: MoviesRepositry
 
