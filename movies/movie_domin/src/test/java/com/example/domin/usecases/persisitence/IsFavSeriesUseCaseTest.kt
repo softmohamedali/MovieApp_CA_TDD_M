@@ -53,7 +53,7 @@ class IsFavSeriesUseCaseTest {
     }
 
     @Test
-    fun `should emit true if series is favorite`(): Unit = runBlocking {
+    fun `should emit true if series is favorite`(): Unit = runTest {
         val favoriteSeries = listOf(
             dummySeries,
             dummySeries
@@ -66,7 +66,7 @@ class IsFavSeriesUseCaseTest {
     }
 
     @Test
-    fun `should emit false if series is not favorite`(): Unit = runBlocking {
+    fun `should emit false if series is not favorite`(): Unit = runTest {
         val favoriteSeries = listOf(
             dummySeries,
             dummySeries
