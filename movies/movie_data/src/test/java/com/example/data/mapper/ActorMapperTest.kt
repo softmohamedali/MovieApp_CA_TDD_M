@@ -11,7 +11,7 @@ class ActorMapperTest {
     fun `remoteActor() toActor should map the same object`(){
         val remoteActor=RemoteActor(
             adult= false,
-            alsoKnownAs= listOf<Any>(),
+            alsoKnownAs= listOf(),
             biography= "String",
             birthday= "String",
             deathday= "Any",
@@ -28,7 +28,7 @@ class ActorMapperTest {
 
         val actor=Actor(
             adult= false,
-            alsoKnownAs= listOf<Any>(),
+            alsoKnownAs= listOf(),
             biography= "String",
             birthday= "String",
             deathday= "Any",
