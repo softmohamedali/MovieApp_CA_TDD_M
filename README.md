@@ -29,12 +29,12 @@ and clean code
 
 ## In-App architecture
 <p>
-  <img src="img/arch.png" height="200" width="900">
+  <img src="img/15.jpg" height="200" width="900">
 </p>
 
 ## In-App Testing
 <p>
-  <img src="img/testing.png" height="220" width="300">
+  <img src="img/16.jpg" height="220" width="300">
 </p>
 
 Unit testing for:
