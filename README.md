@@ -80,6 +80,9 @@ UI test cases:
   - [Movie API](https://www.themoviedb.org/documentation/api)
 - Android Architecture and jetpack compose
   - [book Kickstart-Modern-Android-Development-Jetpack](https://www.amazon.com/Kickstart-Modern-Android-Development-Jetpack/dp/1801811075)
+- Android TDD Testing
+  - [bookAndroid Test-Driven Development by Tutorials](https://www.amazon.com/Android-Test-Driven-Development-Tutorials-Second/dp/1950325415)
+  - And some help of chat gpt
   
   
 
