@@ -78,6 +78,8 @@ UI test cases:
 ## Resources
 - API
   - [Movie API](https://www.themoviedb.org/documentation/api)
+-Android Architecture and jetpack compose
+  - [book Kickstart-Modern-Android-Development-Jetpack](https://www.amazon.com/Kickstart-Modern-Android-Development-Jetpack/dp/1801811075)
   
   
 
