@@ -36,32 +36,53 @@ fun TypeMovieList(
             style = normalText,
             color = Title200
         )
-        LazyVerticalGrid(
-            userScrollEnabled = false,
+        FlowableLayout(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(((types.size/3)*40).dp)
-            ,
-            columns = GridCells.Fixed(3),
-            content ={
-                items(types.size){
-                    Text(
-                        modifier = Modifier
-                            .padding(5.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(BG_trans_light)
-                            .padding(vertical = 5.dp, horizontal = 10.dp)
+            .height(((types.size / 3) * 40).dp)
+        ) {
+            repeat(types.size){
+                Text(
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(BG_trans_light)
+                        .padding(vertical = 5.dp, horizontal = 10.dp)
 
-                        ,
-                        text =types[it].name,
-                        color = White,
-                        style = smallTextBold,
-                        textAlign = TextAlign.Center
-                    )
-                }
-
+                    ,
+                    text =types[it].name,
+                    color = White,
+                    style = smallTextBold,
+                    textAlign = TextAlign.Center
+                )
             }
-        )
+
+        }
+//        LazyVerticalGrid(
+//            userScrollEnabled = false,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(((types.size / 3) * 40).dp)
+//            ,
+//            columns = GridCells.Fixed(3),
+//            content ={
+//                items(types.size){
+//                    Text(
+//                        modifier = Modifier
+//                            .padding(5.dp)
+//                            .clip(RoundedCornerShape(10.dp))
+//                            .background(BG_trans_light)
+//                            .padding(vertical = 5.dp, horizontal = 10.dp)
+//
+//                        ,
+//                        text =types[it].name,
+//                        color = White,
+//                        style = smallTextBold,
+//                        textAlign = TextAlign.Center
+//                    )
+//                }
+//
+//            }
+//        )
 
     }
 }
@@ -85,7 +106,7 @@ fun TypeSeriesList(
             userScrollEnabled = false,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(((types.size/3)*40).dp)
+                .height(((types.size / 3) * 40).dp)
             ,
             columns = GridCells.Fixed(3),
             content ={
