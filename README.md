@@ -21,11 +21,12 @@ and clean code
   
 </p>
 
-## Demo
+##🌴
+
+## Demo (please wait untill demo video loading)
 <p>
   <img src="img/demo.gif" height="500" width="250">
 </p>
-
 
 ## In-App architecture
 <p>
