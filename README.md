@@ -6,7 +6,7 @@ and clean code
 <p align="center">
   <img src="img/4.jpg" height="450" width="220">
   <img src="img/5.jpg" height="450" width="220">
-  <img src="img.jpg" height="450" width="220">
+  <img src="img/6.jpg" height="450" width="220">
   <img src="img/1.jpg" height="450" width="220">
   <img src="img/2.jpg" height="450" width="220">
   <img src="img/3.jpg" height="450" width="220">
