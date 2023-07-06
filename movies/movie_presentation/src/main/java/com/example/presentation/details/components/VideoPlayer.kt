@@ -1,8 +1,7 @@
 package com.example.presentation.details.components
 
-import android.webkit.WebChromeClient
+import android.webkit.WebSettings.PluginState
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +16,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
+
 
 @Composable
 fun VideoView(
@@ -55,7 +55,8 @@ fun YoutubeScreen(
 ) {
 
     val context = LocalContext.current
-    val VIDEO_START_DELAY = 0F
+    val widthAndHeight = "width='220' height='200'"
+    val temp = "<html><body><iframe width=\"360\" height=\"180\" src=\"https://www.youtube.com/embed/${videoId}\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
 
     Box(
         modifier = Modifier
@@ -66,45 +67,29 @@ fun YoutubeScreen(
         AndroidView(
             factory = {
                 WebView(context).apply {
-                    settings.javaScriptEnabled = true
-                    webViewClient = WebViewClient()
-                    webChromeClient = WebChromeClient()
+                    settings.setPluginState(PluginState.ON)
+                    settings.setJavaScriptEnabled(true)
+                    settings.setJavaScriptCanOpenWindowsAutomatically(false)
+//                    settings.setPluginsEnabled(true)
+                    settings.setSupportMultipleWindows(false)
+                    settings.setSupportZoom(false)
+                    setVerticalScrollBarEnabled(false)
+                    setHorizontalScrollBarEnabled(false)
+
                 }
             },
             update = {
-                it.loadUrl("https://www.youtube.com/watch?v=$videoId")
+                it.loadData(temp,"text/html", "utf-8")
             },
-            modifier = Modifier.fillMaxWidth().height(180.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
         )
     }
 }
 
 
 
-//
-//@Composable
-//fun YoutubeScreen(
-//    videoId:String
-//) {
-//    val ctx = LocalContext.current
-//    AndroidView(factory = {
-//
-//        var view=YouTubePlayerView(it)
-//        val fragment = view.addYouTubePlayerListener(
-//            object : AbstractYouTubePlayerListener() {
-//
-//                override fun onReady(youTubePlayer: YouTubePlayer) {
-//                    super.onReady(youTubePlayer)
-//                    youTubePlayer.loadVideo(videoId, 0f)
-//                }
-//
-//
-//            }
-//        )
-//
-//        view
-//    })
-//}
 
 
 
